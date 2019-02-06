@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  nginx-proxy:
+    image: gpupo/container-orchestration:nginx-proxy-${TAG_VERSION}
+    env_file:
+        - .env
+        - .env.local
+    environment:
+      - HTTPS_METHOD=redirect
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - $PWD/nginx/certs:/etc/nginx/certs
+      - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf
+networks:
+    default:
+        external:
+            name: nginx-proxy
