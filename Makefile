@@ -34,3 +34,15 @@ setup:
 	touch .env.local
 	touch .env.prod
 	ln -snf docker-compose.prod.yaml docker-compose.yaml
+	docker network create nginx-proxy
+	printf "${COLOR_COMMENT}Setup Done.${COLOR_RESET}\n"
+
+## Start the webserver
+start:
+	docker-compose up -d;
+	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
+
+## Stop the webserver
+stop:
+	docker-compose down;
+	printf "${COLOR_COMMENT}Web server stoped.${COLOR_RESET}\n"
