@@ -6,4 +6,4 @@ filebeat.inputs:
   exclude_files: ['\.gz$']
 
 output.logstash:
-  hosts: ["{{LOGSTASH_SERVER}}"]
+  hosts: [{{LOGSTASH_SERVER}}]
