@@ -7,7 +7,7 @@ services:
         - .env.prod
     environment:
       - HTTPS_METHOD=redirect
-    command: ["sh", "-c", "cat /etc/filebeat/real-filebeat.yml | sed "s/{{LOGSTASH_SERVER}}/${LOGSTASH_SERVER}/g" > /etc/filebeat/filebeat.yml; service filebeat start; forego start -r"]
+    command: ["sh", "-c", "cat /etc/filebeat/real-filebeat.yml | sed \"s/{{LOGSTASH_SERVER}}/${LOGSTASH_SERVER}/g\" > /etc/filebeat/filebeat.yml; service filebeat start; forego start -r"]
     ports:
       - 80:80
       - 443:443
