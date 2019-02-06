@@ -23,4 +23,12 @@ or, without filebeat:
 
 Start server
 
-    docker-compose up -d;
+    make start;
+
+Stop server
+
+    make stop;
+
+Help
+
+    make

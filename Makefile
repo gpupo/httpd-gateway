@@ -8,6 +8,7 @@ COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
 COLOR_COMMENT = \033[33m
 SHELL := /bin/bash
+NGINX_RESPONSE=`curl -s localhost | grep ngin | sed -e 's/<[^>]*>//g'`
 
 ## List Targets and Descriptions
 help:
@@ -46,3 +47,7 @@ start:
 stop:
 	docker-compose down;
 	printf "${COLOR_COMMENT}Web server stoped.${COLOR_RESET}\n"
+
+## Test the webserver
+test:
+	  printf "\t\t ${COLOR_INFO}$(NGINX_RESPONSE)${COLOR_RESET} Running \n";
