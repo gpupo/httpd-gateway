@@ -48,6 +48,16 @@ stop:
 	docker-compose down;
 	printf "${COLOR_COMMENT}Web server stoped.${COLOR_RESET}\n"
 
+## Start the cadvisor and node-exporter
+monitor-start:
+	pushd monitor && docker-compose up -d && popd;
+	printf "${COLOR_COMMENT}Cadivisor and node-exporter started.${COLOR_RESET}\n"
+
+## Stop the cadvisor and node-exporter
+monitor-stop:
+	pushd monitor && docker-compose down && popd;
+	printf "${COLOR_COMMENT}Cadivisor and node-exporter stoped.${COLOR_RESET}\n"
+
 ## Test the webserver
 test:
 	  printf "\t\t ${COLOR_INFO}$(NGINX_RESPONSE)${COLOR_RESET} Running \n";
