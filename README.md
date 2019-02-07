@@ -29,6 +29,10 @@ Stop server
 
     make stop;
 
+Other commands:
+
+    make help
+
 ## Configure new domains
 
 In each App, the Docker configuration service of the webserver must include the information of the domain for which it will be responsible and then connect to the nginx-proxy network.

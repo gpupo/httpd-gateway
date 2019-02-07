@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   nginx-proxy:
-    image: gpupo/container-orchestration:nginx-proxy-${TAG_VERSION}
+    image: gpupo/container-orchestration:nginx-proxy
     env_file:
         - .env
         - .env.prod
