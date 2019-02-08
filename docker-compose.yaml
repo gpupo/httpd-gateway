@@ -1,7 +1,9 @@
 version: '3.3'
 services:
   nginx-proxy:
-    image: gpupo/container-orchestration:nginx-proxy
+    image: httpd-gateway
+    build:
+        context: ./images/nginx-proxy/
     env_file:
         - .env
         - .env.local
@@ -13,7 +15,6 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - $PWD/nginx/certs:/etc/nginx/certs
-      - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf
 networks:
     default:
         external:
