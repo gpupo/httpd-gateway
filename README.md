@@ -83,3 +83,14 @@ networks:
         external:
             name: nginx-proxy
 ```
+
+
+## Keep domais up
+
+Edit ~/stage/config and include your domains
+
+Put your Apps at ~/stage/${DOMAIN}/current and run ``make start`` or ``bin/up-stages.sh``
+
+## Keep domais up after an update
+
+sudo yum update -y && cd ~/httpd-gateway && make start
