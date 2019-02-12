@@ -49,6 +49,8 @@ alone:
 start:
 	$(DCC) -f docker-compose.prod.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
+	bin/up-stages.sh
+	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
 
 ## Stop the webserver
 stop:

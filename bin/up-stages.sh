@@ -6,6 +6,7 @@ up_stage() {
     printf "\nStage $1\n\t${TARGET_DIRECTORY}";
 
     if [ ! -d $TARGET_DIRECTORY/logs ]; then
+        printf "\n";
         mkdir -pv $TARGET_DIRECTORY/logs;
     fi
 
