@@ -71,3 +71,8 @@ monitor-stop:
 test:
 	  $(DCC) ps;
 	  printf "\t\t ${COLOR_INFO}$(NGINX_RESPONSE)${COLOR_RESET} Running \n";
+
+## Cleanup logs and temporary files
+cleanup:
+		sudo bin/log_cleanup.sh
+		printf "${COLOR_COMMENT}Done.${COLOR_RESET}\n"
