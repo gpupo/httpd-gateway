@@ -74,5 +74,5 @@ test:
 
 ## Cleanup logs and temporary files
 cleanup:
-		sudo bin/log_cleanup.sh
+		sudo bin/log-cleanup.sh
 		printf "${COLOR_COMMENT}Done.${COLOR_RESET}\n"
