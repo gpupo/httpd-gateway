@@ -11,3 +11,8 @@ grep_builder_line () {
 
     echo $CLI_LINE;
 }
+
+
+__banner() {
+    printf "\n----------------------------\n* ${APP_NAME} v$APP_VERSION | ${DATE}\n";
+}

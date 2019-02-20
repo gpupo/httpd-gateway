@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 source "$(dirname "$0")/common/bootstrap.sh"
 
+__banner;
+
 up_stage() {
     TARGET_DIRECTORY="${STAGE_DIRECTORY}/$1"
     printf "\nStage $1\n\t${TARGET_DIRECTORY}";
