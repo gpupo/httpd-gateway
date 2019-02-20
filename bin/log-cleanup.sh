@@ -10,6 +10,3 @@ printf "Cleanup Docker logs\n";
 for f in /var/lib/docker/containers/*/*-json.log; do \
   log_cleanup "$f"; \
 done
-
-
-printf "Done\n";

@@ -36,7 +36,7 @@ bash:
 setup:
 	touch .env.local
 	touch .env.prod
-	docker network create nginx-proxy;
+	docker network create nginx-proxy > /dev/null;
 	$(DCC) build;
 	printf "${COLOR_COMMENT}Setup Done.${COLOR_RESET}\n"
 
