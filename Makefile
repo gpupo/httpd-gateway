@@ -53,6 +53,11 @@ start:
 	bin/up-stages.sh
 	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
 
+## Restart all stages
+restart:
+	$(MAKE) down;
+	$(MAKE) start;
+
 ## Stop the webserver
 stop:
 	$(DCC) down;
