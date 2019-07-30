@@ -50,7 +50,6 @@ start:
 	$(DCC) -f docker-compose.prod.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 	@$(RUN) bin/filebeat-restart
-
 	bin/up-stages.sh
 	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
 
@@ -58,6 +57,12 @@ start:
 stop:
 	$(DCC) down;
 	printf "${COLOR_COMMENT}Web server stoped.${COLOR_RESET}\n"
+
+## Down all stages
+down:
+	$(DCC) down;
+	bin/down-stages.sh
+	printf "${COLOR_COMMENT}Web server and stages DOWN.${COLOR_RESET}\n"
 
 ## Start the cadvisor and node-exporter
 monitor-start:
