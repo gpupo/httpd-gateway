@@ -12,12 +12,7 @@ up_stage() {
         mkdir -pv $TARGET_DIRECTORY/logs;
     fi
 
-    if [ -f $TARGET_DIRECTORY/current/docker-compose.yaml ]; then
-        pushd $TARGET_DIRECTORY/current/;
-        docker-compose up -d;
-    else
-        printf "\n\tMissing $TARGET_DIRECTORY/current/docker-compose.yaml\n";
-    fi
+    ls $TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $TARGET_DIRECTORY/current/ && docker-compose up -d;
 }
 
 eval $(grep_builder_line $STAGE_CONFIG) | while read STAGE
