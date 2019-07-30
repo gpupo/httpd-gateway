@@ -30,7 +30,7 @@ help:
 ## Go to the bash container of the application
 bash:
 	@$(RUN) bash
-	printf "${COLOR_COMMENT}Exit Container.${COLOR_RESET}\n"
+	printf "${COLOR_COMMENT}Exit Containemake r.${COLOR_RESET}\n"
 
 ## Setup environment
 setup:
@@ -49,6 +49,8 @@ alone:
 start:
 	$(DCC) -f docker-compose.prod.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
+	@$(RUN) bin/filebeat-restart
+
 	bin/up-stages.sh
 	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
 
