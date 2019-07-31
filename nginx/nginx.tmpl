@@ -280,7 +280,7 @@ server {
 		root   {{ trim $vhost_root }};
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
-    fastcgi_read_timeout 120s;
+    fastcgi_read_timeout 500;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ end }}
@@ -328,7 +328,7 @@ server {
 		root   {{ trim $vhost_root }};
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
-		fastcgi_read_timeout 120s;
+		fastcgi_read_timeout 500;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		{{ end }}
