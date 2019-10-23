@@ -10,8 +10,9 @@ services:
     environment:
       - HTTPS_METHOD=redirect
     ports:
-      - 80:80
-      - 443:443
+      - '${HOST_PORT_HTTP:-80}:80'
+      - '${HOST_PORT_HTTPS:-443}:443'
+
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - $PWD/nginx/certs:/etc/nginx/certs
