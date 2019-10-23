@@ -98,4 +98,9 @@ sudo yum update -y && cd ~/httpd-gateway && make start
 
 ### Crontab (at boot)
 
-  @reboot ~/httpd-gateway/start
+
+  sudo touch /var/log/httpd-gateway;
+  sudo chmod 666 /var/log/httpd-gateway;
+
+
+  @reboot ~/httpd-gateway/boot > /var/log/httpd-gateway 2>&1

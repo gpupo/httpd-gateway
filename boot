@@ -3,4 +3,4 @@
 cd "$(dirname "$0")";
 printf "Start httpd-gateway.\n";
 
-/usr/bin/make start;
+make start;
