@@ -4,7 +4,7 @@
 DC=docker-compose
 DCC=$(DC) -f docker-compose.yaml
 DCMONITOR=pushd ./monitor/ && docker-compose
-RUN=$(DC) exec nginx-proxy
+RUN=$(DC) exec -T nginx-proxy
 ## Colors
 COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
@@ -30,7 +30,7 @@ help:
 ## Go to the bash container of the application
 bash:
 	@$(RUN) bash
-	printf "${COLOR_COMMENT}Exit Containemake r.${COLOR_RESET}\n"
+	printf "${COLOR_COMMENT}Exit Container.${COLOR_RESET}\n"
 
 ## Setup environment
 setup:
@@ -50,6 +50,7 @@ start:
 	$(DCC) -f docker-compose.prod.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 	@$(RUN) bin/filebeat-restart
+	printf "${COLOR_COMMENT}Filebeat started.${COLOR_RESET}\n"
 	bin/up-stages.sh
 	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
 
