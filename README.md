@@ -94,3 +94,8 @@ Put your Apps at ~/stage/${DOMAIN}/current and run ``make start`` or ``bin/up-st
 ## Keep domais up after an update
 
 sudo yum update -y && cd ~/httpd-gateway && make start
+
+
+### Crontab (at boot)
+
+  @reboot ~/httpd-gateway/start
