@@ -17,10 +17,10 @@ fi
 
 cd ${TARGET_DIRECTORY};
 
-LOCKFILE="${HG_VAR_DIRECTORY}/locker${TARGET_DIRECTORY//\//-}-$TARGET_NAME.lock";
+LOCKFILE="${HG_VAR_DIRECTORY}/locker${TARGET_DIRECTORY//\//-}-${TARGET_NAME/@/_}.lock";
 LOCKFD=99
 
-_lock()             { flock -$1 $LOCKFD; }
+_lock()             { flock -$1 "$LOCKFD"; }
 _no_more_locking()  { _lock u; _lock xn && rm -f $LOCKFILE; }
 _prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking EXIT; }
 _throw_exit()       { printf "\n ERROR => Locker FOUND:\n$LOCKFILE\n[EXIT]\n"; exit 1; }
@@ -32,7 +32,7 @@ _prepare_locking
 # Simplest example is avoiding running multiple instances of script.
 exlock_now || _throw_exit;
 
-printf "\nStage $1 :: make $2";
+printf "\nStage $1 :: make $2\n";
 printf "\n= = = = = = = = = = = = = = =\n$(date)\n" >> ${LOG_FILE};
 
 /usr/local/bin/docker-compose exec -T php-fpm bash -c "make $TARGET_NAME" >> ${LOG_FILE} 2>&1;
