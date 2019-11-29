@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 source "$(dirname "$0")/common/bootstrap.sh"
+STAGE_NAME=$1;
 TARGET_NAME=$2;
-TARGET_DIRECTORY="${STAGE_DIRECTORY}/$1/current"
-LOGS_DIRECTORY="${STAGE_DIRECTORY}/$1/logs"
-LOG_FILE=${LOGS_DIRECTORY}/${2}.log;
+TARGET_DIRECTORY="${STAGE_DIRECTORY}/$STAGE_NAME/current"
+LOGS_DIRECTORY="${STAGE_DIRECTORY}/$STAGE_NAME/logs"
+LOG_FILE=${LOGS_DIRECTORY}/${TARGET_NAME}.log;
 
 if [ ! -d ${TARGET_DIRECTORY} ]; then
     printf "\nERROR: DIRECTORY [${TARGET_DIRECTORY}] not found!\n";
@@ -30,15 +31,16 @@ _prepare_locking()  { eval "exec $LOCKFD>\"$LOCKFILE\""; trap _no_more_locking E
 _throw_exit()       { printf "\n ERROR => Locker FOUND:\n$LOCKFILE\n[EXIT]\n"; exit 1; }
 exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fail
 
+_timestamp() {
+  date "+%Y-%m-%d %H:%M:%S";
+}
 # ON START
 _prepare_locking
 
 # Simplest example is avoiding running multiple instances of script.
 exlock_now || _throw_exit;
 
-printf "\nStage $1 :: make $2\n";
-printf "\n= = = = = = = = = = = = = = =\n$(date)\n" >> ${LOG_FILE};
-
+printf "\n$(_timestamp) [stage-make][$STAGE_NAME::$TARGET_NAME] START ";
+printf "\n= = = = = = = = = = = = = = =\n$(_timestamp) \n" >> ${LOG_FILE};
 /usr/local/bin/docker-compose exec -T php-fpm bash -c "make $TARGET_NAME" >> ${LOG_FILE} 2>&1;
-
-printf "\n... done.\n";
+printf "\n$(_timestamp) [stage-make][$STAGE_NAME::$TARGET_NAME] FINISHED\n";
