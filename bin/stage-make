@@ -15,6 +15,10 @@ if [ ! -d ${LOGS_DIRECTORY} ]; then
     exit 2;
 fi
 
+if [ ! -d ${HG_VAR_DIRECTORY} ]; then
+   mkdir -p $HG_VAR_DIRECTORY;
+fi
+
 cd ${TARGET_DIRECTORY};
 
 LOCKFILE="${HG_VAR_DIRECTORY}/locker${TARGET_DIRECTORY//\//-}-${TARGET_NAME/@/_}.lock";
