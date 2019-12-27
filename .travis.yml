@@ -1,0 +1,14 @@
+sudo: false
+language: php
+os:
+  - linux
+php:
+  - 7.4
+before_script:
+  - make setup;
+script: make alone
+notifications:
+  email: false
+branches:
+  only:
+  - master
