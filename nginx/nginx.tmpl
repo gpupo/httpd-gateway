@@ -283,6 +283,7 @@ server {
     	fastcgi_read_timeout 300s;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
+		proxy_read_timeout 300s;
 		{{ end }}
 
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
@@ -331,6 +332,7 @@ server {
 		fastcgi_read_timeout 300s;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
+		proxy_read_timeout 300s;
 		{{ end }}
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
