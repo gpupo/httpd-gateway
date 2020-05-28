@@ -611,7 +611,7 @@ filebeat.inputs:
   #max_message_size: 20MiB
 
   # The number of seconds of inactivity before a remote connection is closed.
-  #timeout: 300s
+  #timeout: 600s
 
   # Use SSL settings for TCP.
   #ssl.enabled: true
@@ -670,7 +670,7 @@ filebeat.inputs:
     #max_message_size: 20MiB
 
     # The number of seconds of inactivity before a remote connection is closed.
-    #timeout: 300s
+    #timeout: 600s
 
     # Use SSL settings for TCP.
     #ssl.enabled: true

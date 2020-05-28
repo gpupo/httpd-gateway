@@ -280,10 +280,10 @@ server {
 		root   {{ trim $vhost_root }};
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
-    	fastcgi_read_timeout 300s;
+    	fastcgi_read_timeout 600s;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
-		proxy_read_timeout 300s;
+		proxy_read_timeout 600s;
 		{{ end }}
 
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
@@ -329,10 +329,10 @@ server {
 		root   {{ trim $vhost_root }};
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
-		fastcgi_read_timeout 300s;
+		fastcgi_read_timeout 600s;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
-		proxy_read_timeout 300s;
+		proxy_read_timeout 600s;
 		{{ end }}
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
