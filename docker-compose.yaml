@@ -4,6 +4,10 @@ services:
     image: httpd-gateway
     build:
         context: ./images/nginx-proxy/
+    logging:
+        options:
+            max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+            max-file: ${CONTAINER_DEFAULT_MAX_FILE}    
     env_file:
         - .env
         - .env.local

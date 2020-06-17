@@ -1,6 +1,10 @@
 version: '3.3'
 services:
   nginx-proxy:
+    logging:
+        options:
+            max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+            max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     env_file:
         - .env
         - .env.prod
