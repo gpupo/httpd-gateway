@@ -1,3 +1,5 @@
 var/*
 /.env.local
 /.env.prod
+nginx/certs/*
+nginx/vhost.d/*
