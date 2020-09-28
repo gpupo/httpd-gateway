@@ -15,7 +15,7 @@ up_stage() {
     ls $TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $TARGET_DIRECTORY/current/ && docker-compose up -d;
 }
 
-eval $(grep_builder_line $STAGE_CONFIG) | while read STAGE
+eval $(grep_builder_line $SERVER_STAGE_CONFIG_DIR_PATH) | while read STAGE
 do
   up_stage "${STAGE}";
 done
