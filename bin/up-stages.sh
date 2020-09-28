@@ -4,7 +4,7 @@ source "$(dirname "$0")/common/bootstrap.sh"
 __banner;
 
 up_stage() {
-    TARGET_DIRECTORY="${STAGE_DIRECTORY}/$1"
+    TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$1"
     printf "\nStage $1\n\t${TARGET_DIRECTORY}";
 
     if [ ! -d $TARGET_DIRECTORY/logs ]; then
