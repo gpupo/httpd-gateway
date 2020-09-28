@@ -16,3 +16,13 @@ grep_builder_line () {
 __banner() {
     printf "\n----------------------------\n* ${APP_NAME} v$APP_VERSION | ${DATE}\n";
 }
+
+function_load_custom_env_file() {
+    CUSTOM_ENV_FILE=$1;
+    if [ -f $CUSTOM_ENV_FILE ]; then
+        source $CUSTOM_ENV_FILE;
+    else
+        printf "[ERROR] File $CUSTOM_ENV_FILE nof found!\n";
+        exit -1;
+    fi
+}
