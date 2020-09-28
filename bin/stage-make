@@ -2,12 +2,12 @@
 source "$(dirname "$0")/common/bootstrap.sh"
 STAGE_NAME=$1;
 TARGET_NAME=$2;
-TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$STAGE_NAME/current"
+STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$STAGE_NAME/current"
 LOGS_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$STAGE_NAME/logs"
 LOG_FILE=${LOGS_DIRECTORY}/${TARGET_NAME}.log;
 
-if [ ! -d ${TARGET_DIRECTORY} ]; then
-    printf "\nERROR: DIRECTORY [${TARGET_DIRECTORY}] not found!\n";
+if [ ! -d ${STAGE_TARGET_DIRECTORY} ]; then
+    printf "\nERROR: DIRECTORY [${STAGE_TARGET_DIRECTORY}] not found!\n";
     exit 1;
 fi
 
@@ -19,9 +19,9 @@ if [ ! -d ${HTTPS_GATEWAY_VAR_DIRECTORY} ]; then
    mkdir -p $HTTPS_GATEWAY_VAR_DIRECTORY;
 fi
 
-cd ${TARGET_DIRECTORY};
+cd ${STAGE_TARGET_DIRECTORY};
 
-LOCKFILE="${HTTPS_GATEWAY_VAR_DIRECTORY}/locker${TARGET_DIRECTORY//\//-}-${TARGET_NAME/@/_}.lock";
+LOCKFILE="${HTTPS_GATEWAY_VAR_DIRECTORY}/locker${STAGE_TARGET_DIRECTORY//\//-}-${TARGET_NAME/@/_}.lock";
 LOCKFD=99
 
 _lock()             { flock -$1 "$LOCKFD"; }
