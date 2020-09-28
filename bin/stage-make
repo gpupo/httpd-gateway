@@ -3,16 +3,16 @@ source "$(dirname "$0")/common/bootstrap.sh"
 STAGE_NAME=$1;
 TARGET_NAME=$2;
 STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$STAGE_NAME/current"
-LOGS_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$STAGE_NAME/logs"
-LOG_FILE=${LOGS_DIRECTORY}/${TARGET_NAME}.log;
+STAGE_LOGS_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$STAGE_NAME/logs"
+STAGE_LOG_FILE=${STAGE_LOGS_DIRECTORY}/${TARGET_NAME}.log;
 
 if [ ! -d ${STAGE_TARGET_DIRECTORY} ]; then
     printf "\nERROR: DIRECTORY [${STAGE_TARGET_DIRECTORY}] not found!\n";
     exit 1;
 fi
 
-if [ ! -d ${LOGS_DIRECTORY} ]; then
-    mkdir -p ${LOGS_DIRECTORY};
+if [ ! -d ${STAGE_LOGS_DIRECTORY} ]; then
+    mkdir -p ${STAGE_LOGS_DIRECTORY};
 fi
 
 if [ ! -d ${HTTPS_GATEWAY_VAR_DIRECTORY} ]; then
@@ -40,6 +40,6 @@ _prepare_locking
 exlock_now || _throw_exit;
 
 printf "\n$(_timestamp) [stage-make][$STAGE_NAME::$TARGET_NAME] START ";
-printf "\n= = = = = = = = = = = = = = =\n$(_timestamp) \n" >> ${LOG_FILE};
-/usr/local/bin/docker-compose exec -T php-fpm bash -c "make $TARGET_NAME" >> ${LOG_FILE} 2>&1;
+printf "\n= = = = = = = = = = = = = = =\n$(_timestamp) \n" >> ${STAGE_LOG_FILE};
+/usr/local/bin/docker-compose exec -T php-fpm bash -c "make $TARGET_NAME" >> ${STAGE_LOG_FILE} 2>&1;
 printf "\n$(_timestamp) [stage-make][$STAGE_NAME::$TARGET_NAME] FINISHED\n";
