@@ -6,13 +6,10 @@ TARGET_DIRECTORY="${STAGE_DIRECTORY}/$STAGE_NAME/current"
 LOGS_DIRECTORY="${STAGE_DIRECTORY}/$STAGE_NAME/logs"
 LOG_FILE=${LOGS_DIRECTORY}/${TARGET_NAME}.log;
 
-
 if [ ! -d ${TARGET_DIRECTORY} ]; then
     printf "\nERROR: DIRECTORY [${TARGET_DIRECTORY}] not found!\n";
     exit 1;
 fi
-
-
 
 if [ ! -d ${LOGS_DIRECTORY} ]; then
     mkdir -p ${LOGS_DIRECTORY};
@@ -21,8 +18,6 @@ fi
 if [ ! -d ${HG_VAR_DIRECTORY} ]; then
    mkdir -p $HG_VAR_DIRECTORY;
 fi
-
-
 
 cd ${TARGET_DIRECTORY};
 
