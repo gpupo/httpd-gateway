@@ -15,13 +15,13 @@ if [ ! -d ${LOGS_DIRECTORY} ]; then
     mkdir -p ${LOGS_DIRECTORY};
 fi
 
-if [ ! -d ${HG_VAR_DIRECTORY} ]; then
-   mkdir -p $HG_VAR_DIRECTORY;
+if [ ! -d ${HTTPS_GATEWAY_VAR_DIRECTORY} ]; then
+   mkdir -p $HTTPS_GATEWAY_VAR_DIRECTORY;
 fi
 
 cd ${TARGET_DIRECTORY};
 
-LOCKFILE="${HG_VAR_DIRECTORY}/locker${TARGET_DIRECTORY//\//-}-${TARGET_NAME/@/_}.lock";
+LOCKFILE="${HTTPS_GATEWAY_VAR_DIRECTORY}/locker${TARGET_DIRECTORY//\//-}-${TARGET_NAME/@/_}.lock";
 LOCKFD=99
 
 _lock()             { flock -$1 "$LOCKFD"; }
