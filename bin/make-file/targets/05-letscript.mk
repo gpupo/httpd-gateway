@@ -9,7 +9,7 @@ letsencrypt@trigger:
 	printf "${COLOR_COMMENT}Done${COLOR_RESET}\n"
 
 ## Show certificates informations
-letsencrypt@trigger:
+letsencrypt@status:
 	$(DCC) exec nginx-proxy-letsencrypt /app/cert_status
 	printf "${COLOR_COMMENT}Done${COLOR_RESET}\n"
 
