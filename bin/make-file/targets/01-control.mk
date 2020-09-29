@@ -6,7 +6,8 @@ alone:
 
 ## Start the webserver with filebeat log output
 start:
-	$(DCC) -f docker-compose.prod.yaml up -d;
+	test -f docker-compose.local.yaml || touch docker-compose.local.yaml
+	$(DCC) -f docker-compose.prod.yaml -f docker-compose.local.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 	@$(RUN) bin/filebeat-restart
 	printf "${COLOR_COMMENT}Filebeat started.${COLOR_RESET}\n"
