@@ -7,7 +7,7 @@ alone:
 ## Start the webserver with filebeat log output
 start:
 	test -f docker-compose.local.yaml || touch docker-compose.local.yaml;
-	docker network ls | grep -qi $NGINX_PROXY_CONTAINER || docker network create $NGINX_PROXY_CONTAINER;
+	docker network ls | grep -qi nginx-proxy || docker network create nginx-proxy;
 	$(DCC) -f docker-compose.prod.yaml -f docker-compose.local.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 	@$(RUN) bin/filebeat-restart
