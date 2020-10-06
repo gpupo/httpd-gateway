@@ -5,6 +5,7 @@ DC=docker-compose
 DCC=$(DC) -f docker-compose.yaml
 DCMONITOR=pushd ./monitor/ && docker-compose
 RUN=$(DC) exec -T nginx-proxy
+PTTRUN=$(DC) exec nginx-proxy
 ## Colors
 COLOR_RESET   = \033[0m
 COLOR_INFO  = \033[32m
@@ -29,7 +30,7 @@ help:
 
 ## Go to the bash container of the application
 bash:
-	@$(RUN) bash
+	@$(PTTRUN) bash
 	printf "${COLOR_COMMENT}Exit Container.${COLOR_RESET}\n"
 
 ## Setup environment
