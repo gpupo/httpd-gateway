@@ -43,10 +43,14 @@ monitor-stop:
 
 ## Test the webserver
 test:
-	  $(DCC) ps;
-	  printf "\t\t ${COLOR_INFO}$(NGINX_RESPONSE)${COLOR_RESET} Running \n";
+	$(DCC) ps;
+	printf "\t\t ${COLOR_INFO}$(NGINX_RESPONSE)${COLOR_RESET} Running \n";
 
 ## Cleanup logs and temporary files
 cleanup:
-		sudo bin/log-cleanup.sh
-		printf "${COLOR_COMMENT}Done.${COLOR_RESET}\n"
+	sudo bin/log-cleanup.sh
+	printf "${COLOR_COMMENT}Done.${COLOR_RESET}\n"
+
+## WARNING: Reset Certs and Vhosts
+reset:
+	sudo rm -rf nginx/certs/* nginx/vhost.d/*
