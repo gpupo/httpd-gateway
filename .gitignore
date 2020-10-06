@@ -3,3 +3,4 @@ var/*
 /.env.prod
 nginx/certs/*
 nginx/vhost.d/*
+docker-compose.local.yaml
