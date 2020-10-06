@@ -310,6 +310,17 @@ server {
 	{{ end }}
 	access_log /var/log/nginx/access.log logstash;
 
+	error_page 404 /custom_404.html;
+	location = /custom_404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+	error_page 500 502 503 504 /custom_50x.html;
+	location = /custom_50x.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+
 	{{ if eq $network_tag "internal" }}
 	# Only allow traffic from internal clients
 	include /etc/nginx/network_internal.conf;
@@ -366,6 +377,8 @@ server {
 	}
 
 	access_log /var/log/nginx/access.log logstash;
+	add_header hg-ray 500a;
+
 	return 500;
 
 	ssl_certificate /etc/nginx/certs/default.crt;
