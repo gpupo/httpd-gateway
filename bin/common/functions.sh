@@ -13,7 +13,8 @@ grep_builder_line () {
 }
 
 __banner() {
-    printf "\n----------------------------\n* ${APP_NAME} v$APP_VERSION | ${DATE}\n";
+    local line='----------------------------';
+    printf "%s\n*%s | %s\n%s\n" "$line" "${APP_NAME}" "${DATE}" "$line";
 }
 
 function_load_custom_env_file() {
@@ -28,7 +29,7 @@ function_load_custom_env_file() {
 
 up_stage() {
     STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$1"
-    printf "\nStage $1\n\t${STAGE_TARGET_DIRECTORY}";
+    printf "Stage:%s\n Path:%s\n" "$1" "${STAGE_TARGET_DIRECTORY}";
     test -d $STAGE_TARGET_DIRECTORY/logs || mkdir -pv $STAGE_TARGET_DIRECTORY/logs;
     ls $STAGE_TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $STAGE_TARGET_DIRECTORY/current/ && docker-compose up -d;
 }
