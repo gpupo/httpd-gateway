@@ -12,7 +12,6 @@ grep_builder_line () {
     echo $CLI_LINE;
 }
 
-
 __banner() {
     printf "\n----------------------------\n* ${APP_NAME} v$APP_VERSION | ${DATE}\n";
 }
@@ -25,4 +24,11 @@ function_load_custom_env_file() {
         printf "[ERROR] File $CUSTOM_ENV_FILE nof found!\n";
         exit -1;
     fi
+}
+
+up_stage() {
+    STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$1"
+    printf "\nStage $1\n\t${STAGE_TARGET_DIRECTORY}";
+    test -d $STAGE_TARGET_DIRECTORY/logs || mkdir -pv $STAGE_TARGET_DIRECTORY/logs;
+    ls $STAGE_TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $STAGE_TARGET_DIRECTORY/current/ && docker-compose up -d;
 }
