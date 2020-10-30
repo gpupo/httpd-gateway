@@ -14,7 +14,7 @@ grep_builder_line () {
 
 __banner() {
     local line='----------------------------';
-    printf "%s\n*%s | %s\n%s\n" "$line" "${APP_NAME}" "${DATE}" "$line";
+    printf "%s\n*%s | %s\n%s\n" "$line" "${APP_NAME}" "$(date)" "$line";
 }
 
 function_load_custom_env_file() {
