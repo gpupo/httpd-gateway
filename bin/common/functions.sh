@@ -31,5 +31,5 @@ up_stage() {
     STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$1"
     printf "Stage:%s\n Path:%s\n" "$1" "${STAGE_TARGET_DIRECTORY}";
     test -d $STAGE_TARGET_DIRECTORY/logs || mkdir -pv $STAGE_TARGET_DIRECTORY/logs;
-    ls $STAGE_TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $STAGE_TARGET_DIRECTORY/current/ && docker-compose up -d;
+    ls $STAGE_TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $STAGE_TARGET_DIRECTORY/current/ && $DOCKER_COMPOSE_BIN_PATH/docker-compose up -d;
 }

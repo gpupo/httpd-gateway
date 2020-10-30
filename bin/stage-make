@@ -50,5 +50,5 @@ then
     exit -1;
 fi;
 
-/usr/local/bin/docker-compose exec -T $PROJECT_MAIN_SERVICE_NAME bash -c "make $CURRENT_TARGET_NAME" >> ${STAGE_LOG_FILE} 2>&1;
+$DOCKER_COMPOSE_BIN_PATH/docker-compose exec -T $PROJECT_MAIN_SERVICE_NAME bash -c "make $CURRENT_TARGET_NAME" >> ${STAGE_LOG_FILE} 2>&1;
 printf "\n$(_timestamp) [stage-make][$CURRENT_STAGE_NAME::$CURRENT_TARGET_NAME] FINISHED\n";
