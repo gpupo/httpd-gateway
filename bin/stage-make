@@ -11,13 +11,8 @@ if [ ! -d ${STAGE_TARGET_DIRECTORY} ]; then
     exit 1;
 fi
 
-if [ ! -d ${STAGE_LOGS_DIRECTORY} ]; then
-    mkdir -p ${STAGE_LOGS_DIRECTORY};
-fi
-
-if [ ! -d ${HTTPS_GATEWAY_VAR_DIRECTORY} ]; then
-   mkdir -p $HTTPS_GATEWAY_VAR_DIRECTORY;
-fi
+test -d ${STAGE_LOGS_DIRECTORY} || mkdir -p ${STAGE_LOGS_DIRECTORY};
+test -d ${HTTPS_GATEWAY_VAR_DIRECTORY} || mkdir -p $HTTPS_GATEWAY_VAR_DIRECTORY;
 
 cd ${STAGE_TARGET_DIRECTORY};
 
