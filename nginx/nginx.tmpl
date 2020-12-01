@@ -281,9 +281,11 @@ server {
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
     	fastcgi_read_timeout 600s;
+		send_timeout 120s;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		proxy_read_timeout 600s;
+		send_timeout 120s;
 		{{ end }}
 
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
@@ -341,9 +343,11 @@ server {
 		include fastcgi.conf;
 		fastcgi_pass {{ trim $upstream_name }};
 		fastcgi_read_timeout 600s;
+		send_timeout 120s;
 		{{ else }}
 		proxy_pass {{ trim $proto }}://{{ trim $upstream_name }};
 		proxy_read_timeout 600s;
+		send_timeout 120s;
 		{{ end }}
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
