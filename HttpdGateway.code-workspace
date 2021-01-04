@@ -4,5 +4,10 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"*.tmpl*": "nginx",
+			"*.conf*": "nginx"
+		}
+	}
 }
