@@ -13,7 +13,7 @@ services:
       - .env
       - .env.local
     environment:
-      - HTTPS_METHOD=redirect
+      - HTTPS_METHOD=noredirect
     ports:
       - '${HOST_PORT_HTTP:-80}:80'
       - '${HOST_PORT_HTTPS:-443}:443'
