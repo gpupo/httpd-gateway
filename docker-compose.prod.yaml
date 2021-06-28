@@ -22,3 +22,23 @@ services:
       - $PWD/nginx/certs:/etc/nginx/certs:ro
       - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
+  nginx-proxy-letsencrypt:
+    container_name: nginx-proxy-letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $PWD/nginx/certs:/etc/nginx/certs:rw
+      - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
+      - $PWD/nginx/html:/usr/share/nginx/html
+    env_file:
+      - .env
+      - .env.local
+    logging:
+      options:
+        max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+        max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+networks:
+  default:
+    external:
+        name: nginx-proxy
