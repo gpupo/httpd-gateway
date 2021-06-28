@@ -11,7 +11,7 @@ start: dotenv@start webserver@start stages@up
 dotenv@start:
 	test -f .env.local || printf "#env local\n" > .env.local
 	cat .env.default > .env;
-	echo "#" >> .env;
+	printf "\n\n#\n\n" >> .env;
 	cat .env.local >> .env;
 	printf "${COLOR_COMMENT}Env Defined.${COLOR_RESET}\n"
 
