@@ -37,6 +37,7 @@ bash:
 setup:
 	touch .env.local
 	touch .env.prod
+	touch ./config/traefik.toml;
 	docker network create nginx-proxy > /dev/null;
 	$(DCC) build;
 	printf "${COLOR_COMMENT}Setup Done.${COLOR_RESET}\n"
