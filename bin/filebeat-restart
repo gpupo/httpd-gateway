@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-cat /etc/filebeat/real-filebeat.yml | sed "s/{{LOGSTASH_SERVER}}/${LOGSTASH_SERVER}/g" > /etc/filebeat/filebeat.yml;
-cat /etc/filebeat/filebeat.yml;
-service filebeat stop > /dev/null;
-service filebeat start;

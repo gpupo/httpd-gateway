@@ -18,11 +18,6 @@ stages@up:
 	bin/up-stages.sh
 	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
 
-## Start filebeat log output
-filebeat@start:
-	@$(RUN) bin/filebeat-restart
-	printf "${COLOR_COMMENT}Filebeat started.${COLOR_RESET}\n"
-
 ## Restart all stages
 restart:
 	$(MAKE) down;

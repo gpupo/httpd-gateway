@@ -21,7 +21,7 @@ Start server
 
     make alone;
 
-Start server with Filebeat
+Start server
 
     make start;
 

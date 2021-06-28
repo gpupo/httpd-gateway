@@ -1,9 +1,0 @@
-filebeat.inputs:
-- input_type: log
-  enabled: true
-  paths:
-    - /var/log/nginx/*.log
-  exclude_files: ['\.gz$']
-
-output.logstash:
-  hosts: [{{LOGSTASH_SERVER}}]
