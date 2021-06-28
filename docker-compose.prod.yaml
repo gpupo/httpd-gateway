@@ -64,6 +64,9 @@ services:
         - traefik-certs:/etc/traefik/ssl/
         - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
         - '/etc/localtime:/etc/localtime'
+volumes:
+    traefik-certs:
+        external: true
 networks:
   default:
       external:
