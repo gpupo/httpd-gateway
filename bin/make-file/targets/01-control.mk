@@ -5,7 +5,15 @@ alone:
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 
 ## Start all services
-start: webserver@start stages@up
+start: dotenv@start webserver@start stages@up
+
+## Setup Env local
+dotenv@start:
+	test -f .env.local || printf "#env local\n" > .env.local
+	cat .env.default > .env;
+	echo "#" >> .env;
+	cat .env.local >> .env;
+	printf "${COLOR_COMMENT}Env Defined.${COLOR_RESET}\n"
 
 ## Start the webserver
 webserver@start:
