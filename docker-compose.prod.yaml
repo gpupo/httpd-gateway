@@ -1,17 +1,24 @@
 version: '3.3'
 services:
   nginx-proxy:
+    container_name: nginx-proxy
+    image: httpd-gateway
+    build:
+      context: ./images/nginx-proxy/
     logging:
-        options:
-            max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
-            max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+      options:
+        max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+        max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     env_file:
-        - .env
-        - .env.prod
+      - .env
+      - .env.local
+    environment:
+      - HTTPS_METHOD=noredirect
+    ports:
+      - '${HOST_PORT_HTTP:-80}:80'
+      - '${HOST_PORT_HTTPS:-443}:443'
     volumes:
-        - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
-        - $PWD/nginx/html:/usr/share/nginx/html
-        - /var/run/docker.sock:/tmp/docker.sock:ro
-        - $PWD/nginx/certs:/etc/nginx/certs
-        - $PWD/nginx/nginx.tmpl:/app/nginx.tmpl
-        - $PWD/bin:/app/bin
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - $PWD/nginx/certs:/etc/nginx/certs:ro
+      - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
+      - $PWD/nginx/html:/usr/share/nginx/html
