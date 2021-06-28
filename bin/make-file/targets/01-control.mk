@@ -19,7 +19,7 @@ dotenv@start:
 webserver@start:
 	test -f docker-compose.local.yaml || printf "version: '3.3'\nservices:\n  nginx-proxy: ~" > docker-compose.local.yaml
 	docker network ls | grep -qi nginx-proxy || docker network create nginx-proxy;
-	$(DCC) -f docker-compose.prod.yaml -f docker-compose.local.yaml up -d;
+	$(DCC) -f docker-compose.yaml -f docker-compose.local.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 
 stages@up:
