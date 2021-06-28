@@ -38,7 +38,36 @@ services:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+  traefik:
+    image: traefik:${TRAEFIK_IMAGE_VERSION}
+    hostname: traefik
+    container_name: traefik
+    logging:
+        options:
+            max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+            max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+    restart: always
+    command: --docker
+    env_file:
+        - .env
+        - .env.local
+    environment:
+      - LETSENCRYPT_HOST=${TRAEFIK_VIRTUAL_HOST}
+      - VIRTUAL_HOST=${TRAEFIK_VIRTUAL_HOST},*.docker.local
+      - VIRTUAL_PORT=80
+    expose:
+        - "80"
+    networks:
+        - backend
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - traefik-certs:/etc/traefik/ssl/
+        - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
+        - '/etc/localtime:/etc/localtime'
 networks:
   default:
-    external:
-        name: nginx-proxy
+      external:
+          name: ${NETWORK_GATEWAY_NAME}
+  backend:
+      external:
+          name: ${NETWORK_BACKEND_NAME}
