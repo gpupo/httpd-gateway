@@ -4,16 +4,24 @@ alone:
 	$(DCC) up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 
-## Start the webserver with filebeat log output
-start:
+## Start all services
+start: webserver@start stages@up
+
+## Start the webserver
+webserver@start:
 	test -f docker-compose.local.yaml || printf "version: '3.3'\nservices:\n  nginx-proxy: ~" > docker-compose.local.yaml
 	docker network ls | grep -qi nginx-proxy || docker network create nginx-proxy;
 	$(DCC) -f docker-compose.prod.yaml -f docker-compose.local.yaml up -d;
 	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
-	@$(RUN) bin/filebeat-restart
-	printf "${COLOR_COMMENT}Filebeat started.${COLOR_RESET}\n"
+
+stages@up:
 	bin/up-stages.sh
 	printf "${COLOR_COMMENT}Stages up.${COLOR_RESET}\n"
+
+## Start filebeat log output
+filebeat@start:
+	@$(RUN) bin/filebeat-restart
+	printf "${COLOR_COMMENT}Filebeat started.${COLOR_RESET}\n"
 
 ## Restart all stages
 restart:
