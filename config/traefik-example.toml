@@ -12,7 +12,6 @@ logLevel = "INFO"
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "docker.place"
 watch = true
 exposedByDefault = false
 usebindportip = true
