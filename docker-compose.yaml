@@ -43,34 +43,34 @@ services:
     hostname: traefik
     container_name: traefik
     logging:
-        options:
-            max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
-            max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+      options:
+        max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+        max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     restart: always
     command: --docker
     env_file:
-        - .env
-        - .env.local
+      - .env
+      - .env.local
     environment:
       - LETSENCRYPT_HOST=${TRAEFIK_VIRTUAL_HOST}
       - VIRTUAL_HOST=${TRAEFIK_VIRTUAL_HOST},*.docker.local,*.place
       - VIRTUAL_PORT=80
     expose:
-        - "80"
+      - "80"
     networks:
-        - backend
+      - backend
     volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - traefik-certs:/etc/traefik/ssl/
-        - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
-        - '/etc/localtime:/etc/localtime'
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik-certs:/etc/traefik/ssl/
+      - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
+      - '/etc/localtime:/etc/localtime'
 volumes:
-    traefik-certs:
-        external: true
+  traefik-certs:
+    external: true
 networks:
   default:
-      external:
-          name: ${NETWORK_GATEWAY_NAME}
+    external:
+      name: ${NETWORK_GATEWAY_NAME}
   backend:
-      external:
-          name: ${NETWORK_BACKEND_NAME}
+    external:
+      name: ${NETWORK_BACKEND_NAME}
