@@ -14,7 +14,6 @@ logLevel = "INFO"
 endpoint = "unix:///var/run/docker.sock"
 domain = "docker.place"
 watch = true
-network = "traefik-proxy"
 exposedByDefault = false
 usebindportip = true
 swarmMode = false

@@ -47,7 +47,7 @@ services:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     restart: always
-    command: --docker
+    command: --docker --providers.docker.network=${NETWORK_BACKEND_NAME}
     env_file:
       - .env
       - .env.local
