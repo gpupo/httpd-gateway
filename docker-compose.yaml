@@ -64,6 +64,14 @@ services:
       - traefik-certs:/etc/traefik/ssl/
       - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
       - '/etc/localtime:/etc/localtime'
+  # whoami:
+  #   image: jwilder/whoami
+  #   expose:
+  #     - "8000"
+  #   environment:
+  #     - VIRTUAL_HOST=whoami.local
+  #     - LETSENCRYPT_HOST=
+  #     - VIRTUAL_PORT=8000      
 volumes:
   traefik-certs:
     external: true
