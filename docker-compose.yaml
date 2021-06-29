@@ -11,7 +11,6 @@ services:
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     env_file:
       - .env
-      - .env.local
     environment:
       - HTTPS_METHOD=noredirect
     ports:
@@ -22,6 +21,7 @@ services:
       - $PWD/nginx/certs:/etc/nginx/certs:ro
       - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
+      - '/etc/localtime:/etc/localtime'
   nginx-proxy-letsencrypt:
     container_name: nginx-proxy-letsencrypt
     image: jrcs/letsencrypt-nginx-proxy-companion
@@ -31,9 +31,9 @@ services:
       - $PWD/nginx/certs:/etc/nginx/certs:rw
       - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
+      - '/etc/localtime:/etc/localtime'
     env_file:
       - .env
-      - .env.local
     logging:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
@@ -50,7 +50,6 @@ services:
     command: --docker --docker.network=${NETWORK_BACKEND_NAME}
     env_file:
       - .env
-      - .env.local
     environment:
       - LETSENCRYPT_HOST=${TRAEFIK_LETSENCRYPT_HOST}
       - VIRTUAL_HOST=${TRAEFIK_VIRTUAL_HOST},*.docker.local,*.place
@@ -59,6 +58,7 @@ services:
       - "80"
     networks:
       - backend
+      - default
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - traefik-certs:/etc/traefik/ssl/
