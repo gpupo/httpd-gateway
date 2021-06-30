@@ -35,10 +35,9 @@ bash:
 
 ## Setup environment
 setup:
-	touch .env.local
-	touch .env.prod
 	touch ./config/traefik.toml;
-	docker network create nginx-proxy > /dev/null;
+	docker network ls | grep -qi ${NETWORK_BACKEND_NAME} || docker network create ${NETWORK_BACKEND_NAME};
+	docker network ls | grep -qi ${NETWORK_GATEWAY_NAME} || docker network create ${NETWORK_GATEWAY_NAME};
 	$(DCC) build;
 	printf "${COLOR_COMMENT}Setup Done.${COLOR_RESET}\n"
 
