@@ -72,7 +72,7 @@ services:
       - "8000"
     environment:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
-      - LETSENCRYPT_HOST=
+      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
       - VIRTUAL_PORT=8000
     labels:
       - "traefik.web.port=8000"
