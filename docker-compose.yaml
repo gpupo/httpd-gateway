@@ -66,7 +66,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
       - '/etc/localtime:/etc/localtime'
-  whoami:
+  whoami-public:
     image: jwilder/whoami
     expose:
       - "8000"
@@ -74,6 +74,16 @@ services:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
       - VIRTUAL_PORT=8000
+    networks:
+      - default  
+  whoami-backend:
+    image: jwilder/whoami
+    expose:
+      - "8000"
+    environment:
+      - VIRTUAL_HOST=
+      - LETSENCRYPT_HOST=
+      - VIRTUAL_PORT=
     labels:
       - "traefik.web.port=8000"
       - "traefik.web.frontend.rule=Host:whoami.docker.place"
@@ -81,7 +91,6 @@ services:
       - "traefik.docker.network=${NETWORK_BACKEND_NAME}"
     networks:
       - backend
-      - default  
 networks:
   default:
     external:
