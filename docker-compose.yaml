@@ -49,13 +49,13 @@ services:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     restart: always
-    command: --docker --docker.network=${NETWORK_BACKEND_NAME} --docker.domain=${TRAEFIK_VIRTUAL_HOST}
+    command: --docker --docker.network=${NETWORK_BACKEND_NAME} --docker.domain=docker.place
     env_file:
       - .env
       - .env.local
     environment:
       - LETSENCRYPT_HOST=
-      - VIRTUAL_HOST=${TRAEFIK_VIRTUAL_HOST}
+      - VIRTUAL_HOST=*.place
       - VIRTUAL_PORT=80
     expose:
       - "80"
