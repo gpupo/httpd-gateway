@@ -10,8 +10,9 @@ start: dotenv@start webserver@start stages@up
 ## Setup Env local
 dotenv@start:
 	test -f .env.local || printf "\n#env local\n" > .env.local
-	cat ./.env.default ./.env.local > .env;
-	./bin/env-normalize.sh;
+	cat ./.env.default ./.env.local > ./.env;
+	./bin/env-normalize.sh ./.env;
+	cat ./.env;
 	printf "${COLOR_COMMENT}Env Defined.${COLOR_RESET}\n"
 
 ## Start the webserver

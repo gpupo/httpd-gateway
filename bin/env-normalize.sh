@@ -17,4 +17,4 @@ for K in "${!collection[@]}"; do
 done
 
 # Ordena alfabeticamente as variaveis e elimina variaveis vazias
-sort $envTarget | grep -v "=$" > $envFile;
+sort $envTarget | uniq -u > $envFile;
