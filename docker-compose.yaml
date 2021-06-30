@@ -13,7 +13,7 @@ services:
       - .env
     environment:
       - HTTPS_METHOD=noredirect
-      - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
+      # - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
     ports:
       - '${HOST_PORT_HTTP:-80}:80'
       - '${HOST_PORT_HTTPS:-443}:443'
@@ -22,17 +22,25 @@ services:
       - $PWD/nginx/certs:/etc/nginx/certs:ro
       - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
-      - '/etc/localtime:/etc/localtime'
+      - /etc/localtime:/etc/localtime
+  whoami-public:
+    image: jwilder/whoami
+    expose:
+      - "8000"
+    environment:
+      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
+      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - VIRTUAL_PORT=8000
   nginx-proxy-letsencrypt:
     container_name: nginx-proxy-letsencrypt
-    image: nginxproxy/acme-companion
+    image: nginxproxy/acme-companion:2.1.0
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - $PWD/nginx/certs:/etc/nginx/certs:rw
       - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
-      - '/etc/localtime:/etc/localtime'
+      - /etc/localtime:/etc/localtime
     env_file:
       - .env
     logging:
@@ -47,7 +55,7 @@ services:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     restart: always
-    command: --docker --docker.network=${NETWORK_GATEWAY_NAME} --docker.domain=docker.place
+    command: --docker --docker.network=${NETWORK_GATEWAY_NAME} --docker.domain=docker.place --api=false --api.dashboard=false --docker.usebindportip=false
     env_file:
       - .env
     environment:
@@ -62,15 +70,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
-      - '/etc/localtime:/etc/localtime'
-  whoami-public:
-    image: jwilder/whoami
-    expose:
-      - "8000"
-    environment:
-      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
-      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
-      - VIRTUAL_PORT=8000
+      - /etc/localtime:/etc/localtime
   whoami-backend:
     image: jwilder/whoami
     expose:
