@@ -74,8 +74,6 @@ services:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
       - VIRTUAL_PORT=8000
-    networks:
-      - default  
   whoami-backend:
     image: jwilder/whoami
     expose:
