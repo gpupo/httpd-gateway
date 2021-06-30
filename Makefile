@@ -34,11 +34,10 @@ bash:
 	printf "${COLOR_COMMENT}Exit Container.${COLOR_RESET}\n"
 
 ## Setup environment
-setup:
+setup: dotenv@start
+setup: 
 	touch ./config/traefik.toml;
-	source ./.env; \
-	docker network ls | grep -qi ${NETWORK_BACKEND_NAME} || docker network create ${NETWORK_BACKEND_NAME}; \
-	docker network ls | grep -qi ${NETWORK_GATEWAY_NAME} || docker network create ${NETWORK_GATEWAY_NAME};
+	./bin/network-normalize.sh;
 	$(DCC) build;
 	printf "${COLOR_COMMENT}Setup Done.${COLOR_RESET}\n"
 
