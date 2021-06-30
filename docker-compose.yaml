@@ -54,7 +54,7 @@ services:
       - .env
       - .env.local
     environment:
-      - LETSENCRYPT_HOST=${TRAEFIK_LETSENCRYPT_HOST}
+      - LETSENCRYPT_HOST=
       - VIRTUAL_HOST=${TRAEFIK_VIRTUAL_HOST}
       - VIRTUAL_PORT=80
     expose:
@@ -71,7 +71,7 @@ services:
     expose:
       - "8000"
     environment:
-      - VIRTUAL_HOST=whoami.local
+      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=
       - VIRTUAL_PORT=8000
     labels:
