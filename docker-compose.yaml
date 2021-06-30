@@ -11,7 +11,6 @@ services:
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     env_file:
       - .env
-      - .env.local
     environment:
       - HTTPS_METHOD=noredirect
       - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
@@ -26,7 +25,7 @@ services:
       - '/etc/localtime:/etc/localtime'
   nginx-proxy-letsencrypt:
     container_name: nginx-proxy-letsencrypt
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: nginxproxy/acme-companion
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -36,7 +35,6 @@ services:
       - '/etc/localtime:/etc/localtime'
     env_file:
       - .env
-      - .env.local
     logging:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
@@ -49,10 +47,9 @@ services:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
     restart: always
-    command: --docker --docker.network=${NETWORK_BACKEND_NAME} --docker.domain=docker.place
+    command: --docker --docker.network=${NETWORK_GATEWAY_NAME} --docker.domain=docker.place
     env_file:
       - .env
-      - .env.local
     environment:
       - LETSENCRYPT_HOST=
       - VIRTUAL_HOST=*.place
