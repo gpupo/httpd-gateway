@@ -45,8 +45,8 @@ services:
     profiles:
       - "proxyProfile"
     environment:
-      - VIRTUAL_HOST=traefik.local
-      - LETSENCRYPT_HOST=
+      - VIRTUAL_HOST=.place
+      - VIRTUAL_PORT=80
     networks:
       - default  
   whoami-backend:

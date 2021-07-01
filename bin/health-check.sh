@@ -5,18 +5,18 @@ git pull;
 make basic;
 /usr/local/bin/docker-compose logs --tail=5 -f &
 
-sleep 10;
-curl localhost;
+printf "\n whoami local\n"
 curl -H "Host:whoami.local" localhost;
-docker ps;
+
+printf "\n whoami ssl\n"
 curl "https://${SERVER_DEFAULT_HOST:-whoami.yourdomain.tld}"
 
 
 printf "\n Test Traefik\n"
-curl -H "Host:traefik.local" localhost;
+curl -H "Host:traefik.place" localhost;
 
 printf "\n Test Traefik API"
-curl http://127.0.0.1:808o;
+curl http://127.0.0.1:8080;
 
 printf "\n Test Traefik container (PORT)\n"
 curl -H "Host:whoami-backend.place" http://127.0.0.1:8081;
