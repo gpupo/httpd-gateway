@@ -8,10 +8,11 @@ alone:
 basic: dotenv@start 
 basic:
 	$(DCC) --profile frontendProfile up -d;
+	$(DCC) --profile proxyProfile up -d;
 	printf "${COLOR_COMMENT}Basic Web server started.${COLOR_RESET}\n"
 
 ## Start all services
-start: dotenv@start webserver@start stages@up
+start: basic stages@up
 
 ## Setup Env local
 dotenv@start:
