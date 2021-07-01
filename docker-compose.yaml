@@ -44,6 +44,9 @@ services:
     container_name: traefik
     profiles:
       - "proxyProfile"
+    environment:
+      - VIRTUAL_HOST=traefik.local
+      - LETSENCRYPT_HOST=
   whoami-backend:
     extends:
       file: service-whoami.yaml
