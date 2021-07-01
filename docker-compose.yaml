@@ -17,6 +17,18 @@ services:
       - default  
     environment:
       - VIRTUAL_HOST=whoami.local
+  whoami-ssl-public:
+    extends:
+      file: service-whoami.yaml
+      service: serviceWhoami
+    profiles:
+      - "frontendProfile"
+    container_name: whoami-ssl-public      
+    networks:
+      - default  
+    environment:
+      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST:-whoami.yourdomain.tld}
+      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST:-whoami.yourdomain.tld}
   acme-companion:
     extends:
       file: service-acme-companion.yaml

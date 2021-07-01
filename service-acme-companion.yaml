@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     environment:
-      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - NGINX_PROXY_CONTAINER=${NGINX_PROXY_CONTAINER:-nginx-proxy}
     logging:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
