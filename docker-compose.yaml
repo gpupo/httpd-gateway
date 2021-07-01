@@ -58,7 +58,7 @@ services:
       - "traefik.web.frontend.rule=Host:whoami-backend.place"
       # - "traefik.docker.network=${NETWORK_BACKEND_NAME:-backendNetwork}"
     networks:
-      - backend
+      - default
 volumes:
   conf:
   vhost:
