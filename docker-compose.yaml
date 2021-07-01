@@ -50,17 +50,13 @@ services:
     networks:
       - default  
   whoami-backend:
-    extends:
-      file: service-whoami.yaml
-      service: serviceWhoami
+    image: traefik/whoami
     container_name: whoami-backend
     profiles:
       - "proxyProfile"
     labels:
-      - "traefik.web.port=8000"
       - "traefik.web.frontend.rule=Host:whoami-backend.place"
-      - "traefik.web.frontend.entryPoints=http"
-      - "traefik.docker.network=${NETWORK_BACKEND_NAME:-backendNetwork}"
+      # - "traefik.docker.network=${NETWORK_BACKEND_NAME:-backendNetwork}"
     networks:
       - backend
 volumes:
