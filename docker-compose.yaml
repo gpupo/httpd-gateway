@@ -23,6 +23,8 @@ services:
       service: serviceAcmeCompanion
     networks:
       - default
+    profiles:  
+      - "backendProfile"      
   traefik:
     extends:
       file: service-traefik.yaml
