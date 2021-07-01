@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   serviceTraefik:
-      image: traefik:${TRAEFIK_IMAGE_VERSION}
+      image: traefik:${TRAEFIK_IMAGE_VERSION:-1.7.10-alpine}
       container_name: traefik
       profiles:
         - "proxyProfile"

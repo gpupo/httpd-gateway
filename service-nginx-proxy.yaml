@@ -14,7 +14,7 @@ services:
       - .env
     environment:
       - HTTPS_METHOD=noredirect
-      - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
+      - DEFAULT_HOST=
     ports:
       - '${HOST_PORT_HTTP:-80}:80'
       - '${HOST_PORT_HTTPS:-443}:443'
