@@ -4,13 +4,16 @@ services:
     extends:
       file: service-nginx-proxy.yaml
       service: serviceNginxProxy
+    networks:
+      - default
   whoami-public:
     extends:
       file: service-whoami.yaml
       service: serviceWhoami
     profiles:
       - "frontendProfile"
-    container_name: whoami-public
+    networks:
+      - default  
     environment:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
@@ -18,6 +21,8 @@ services:
     extends:
       file: service-acme-companion.yaml
       service: serviceAcmeCompanion
+    networks:
+      - default
   traefik:
     extends:
       file: service-traefik.yaml
