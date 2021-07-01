@@ -47,6 +47,8 @@ services:
     environment:
       - VIRTUAL_HOST=traefik.local
       - LETSENCRYPT_HOST=
+    networks:
+      - default  
   whoami-backend:
     extends:
       file: service-whoami.yaml
