@@ -7,9 +7,6 @@ logLevel = "INFO"
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-    [entryPoints.http.auth.basic]
-    users = []
-
 [docker]
 endpoint = "unix:///var/run/docker.sock"
 watch = true
