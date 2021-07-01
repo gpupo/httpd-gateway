@@ -41,7 +41,7 @@ services:
       - "traefik.web.port=8000"
       - "traefik.web.frontend.rule=Host:whoami.docker.place"
       - "traefik.web.frontend.entryPoints=http"
-      - "traefik.docker.network=${NETWORK_BACKEND_NAME}"
+      - "traefik.docker.network=${NETWORK_BACKEND_NAME:-backendNetwork}"
     networks:
       - backend
 volumes:
