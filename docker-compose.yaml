@@ -28,7 +28,7 @@ services:
       - /etc/localtime:/etc/localtime
   whoami-public:
     extends:
-      file: service-whoami.yml
+      file: service-whoami.yaml
       service: serviceWhoami
     profiles:
       - "frontendProfile"
@@ -55,14 +55,14 @@ services:
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
   traefik:
     extends:
-      file: service-traefik.yml
+      file: service-traefik.yaml
       service: serviceTraefik
     container_name: traefik
     profiles:
       - "proxyProfile"
   whoami-backend:
     extends:
-      file: service-whoami.yml
+      file: service-whoami.yaml
       service: serviceWhoami
     container_name: whoami-backend
     profiles:
