@@ -15,8 +15,7 @@ services:
     networks:
       - default  
     environment:
-      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
-      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - VIRTUAL_HOST=whoami.local
   acme-companion:
     extends:
       file: service-acme-companion.yaml
