@@ -2,8 +2,6 @@ version: '3.9'
 services:
   serviceWhoami:
     image: jwilder/whoami
-        profiles:
-          - "proxyProfile"
     expose:
       - "8000"
     environment:
