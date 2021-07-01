@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 source ./.env;
-docker network ls | grep -qi ${NETWORK_BACKEND_NAME} || docker network create ${NETWORK_BACKEND_NAME};
-docker network ls | grep -qi ${NETWORK_GATEWAY_NAME} || docker network create ${NETWORK_GATEWAY_NAME};
+networkBackendName=${NETWORK_BACKEND_NAME:-backendNetwork};
+networkfrontendName=${NETWORK_FRONTEND_NAME:-frontendNetwork};
+docker network ls | grep -qi ${networkfrontendName} || docker network create ${networkfrontendName};
+docker network ls | grep -qi ${networkBackendName} || docker network create ${networkBackendName};
