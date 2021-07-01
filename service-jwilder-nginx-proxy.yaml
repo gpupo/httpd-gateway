@@ -22,7 +22,7 @@ services:
       - '${HOST_PORT_HTTPS:-443}:443'
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - $PWD/nginx/certs:/etc/nginx/certs:ro
-      - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
       - /etc/localtime:/etc/localtime
