@@ -5,6 +5,7 @@ services:
     image: httpd-gateway
     profiles:
       - "frontendProfile"
+    restart: always
     build:
       context: ./images/nginx-proxy/
     logging:
@@ -41,7 +42,6 @@ services:
     image: nginxproxy/acme-companion:2.1.0
     profiles:
       - "frontendProfile"
-    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - $PWD/nginx/certs:/etc/nginx/certs:rw
@@ -63,7 +63,6 @@ services:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
         max-file: ${CONTAINER_DEFAULT_MAX_FILE}
-    restart: always
     command: --docker --docker.network=${NETWORK_GATEWAY_NAME} --docker.domain=docker.place --api=false --api.dashboard=false --docker.usebindportip=false
     env_file:
       - .env
