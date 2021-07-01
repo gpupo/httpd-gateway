@@ -2,10 +2,12 @@ version: '3.9'
 services:
   serviceNginxProxy:
     container_name: nginx-proxy
-    image: nginxproxy/nginx-proxy
+    image: nginx-proxy-custom
     profiles:
       - "frontendProfile"
     restart: always
+    build:
+      context: ./images/jwilder-nginx-proxy/
     logging:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
