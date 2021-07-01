@@ -11,6 +11,8 @@ services:
       - /etc/localtime:/etc/localtime
     env_file:
       - .env
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
     logging:
       options:
         max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
