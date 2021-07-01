@@ -24,7 +24,7 @@ services:
     networks:
       - default
     profiles:  
-      - "backendProfile"      
+      - "frontendProfile"      
   traefik:
     extends:
       file: service-traefik.yaml
