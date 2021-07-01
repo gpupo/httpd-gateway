@@ -7,7 +7,7 @@ services:
         options:
           max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
           max-file: ${CONTAINER_DEFAULT_MAX_FILE}
-      command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-frontendNetwork} --docker.domain=traefik.local --api=false --api.dashboard=false --docker.usebindportip=false
+      command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-backendNetwork} --docker.domain=traefik.local --docker.exposedByDefault=false --docker.usebindportip=true --api=false --api.dashboard=false --docker.usebindportip=false
       env_file:
         - .env
       environment:
