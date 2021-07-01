@@ -13,7 +13,7 @@ services:
       - .env
     environment:
       - HTTPS_METHOD=noredirect
-      # - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
+      - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
     ports:
       - '${HOST_PORT_HTTP:-80}:80'
       - '${HOST_PORT_HTTPS:-443}:443'
@@ -23,6 +23,15 @@ services:
       - $PWD/nginx/vhost.d:/etc/nginx/vhost.d
       - $PWD/nginx/html:/usr/share/nginx/html
       - /etc/localtime:/etc/localtime
+  whoami-public:
+    image: jwilder/whoami
+    container_name: whoami-public
+    expose:
+      - "8000"
+    environment:
+      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
+      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - VIRTUAL_PORT=8000
   nginx-proxy-letsencrypt:
     container_name: nginx-proxy-letsencrypt
     image: nginxproxy/acme-companion:2.1.0
@@ -51,8 +60,8 @@ services:
     env_file:
       - .env
     environment:
-      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST},*.place
-      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - VIRTUAL_HOST=*.place
+      - LETSENCRYPT_HOST=
       - VIRTUAL_PORT=80
     expose:
       - "80"
@@ -65,6 +74,7 @@ services:
       - /etc/localtime:/etc/localtime
   whoami-backend:
     image: jwilder/whoami
+    container_name: whoami-backend
     expose:
       - "8000"
     environment:
