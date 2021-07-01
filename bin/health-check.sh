@@ -8,3 +8,4 @@ curl -H "Host: whoami.local" localhost;
 docker ps;
 curl "https://${SERVER_DEFAULT_HOST:-whoami.yourdomain.tld}"
 curl -H "Host: traefik.local" localhost;
+curl -H "Host: whoami-backend.place" localhost;
