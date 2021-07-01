@@ -15,5 +15,9 @@ curl "https://${SERVER_DEFAULT_HOST:-whoami.yourdomain.tld}"
 printf "\n Test Traefik\n"
 curl -H "Host: traefik.local" localhost;
 
+printf "\n Test Traefik container (PORT)\n"
+curl -H "Host: whoami-backend.place" localhost:8080;
+
 printf "\n Test Traefik container\n"
 curl -H "Host: whoami-backend.place" localhost;
+
