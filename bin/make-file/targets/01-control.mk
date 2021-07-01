@@ -7,7 +7,7 @@ alone:
 
 basic: dotenv@start 
 basic:
-	$(DCC) --profile frontendProfile,backendProfile up -d;
+	$(DCC) --profile frontendProfile up -d;
 	printf "${COLOR_COMMENT}Basic Web server started.${COLOR_RESET}\n"
 
 ## Start all services
