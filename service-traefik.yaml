@@ -7,7 +7,7 @@ services:
         options:
           max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
           max-file: ${CONTAINER_DEFAULT_MAX_FILE}
-      command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-backendNetwork} --docker.domain=traefik.local --docker.exposedByDefault=false --docker.usebindportip=true --api=false --api.dashboard=false --docker.usebindportip=false
+      command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-backendNetwork} --docker.domain=traefik.local --docker.exposedByDefault=false --docker.usebindportip=true --api=false --api.dashboard=false
       env_file:
         - .env
       environment:
@@ -21,5 +21,5 @@ services:
         - default
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-        - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
+        - ${PWD}/config/traefik-example.toml:/etc/traefik/traefik.toml
         - /etc/localtime:/etc/localtime
