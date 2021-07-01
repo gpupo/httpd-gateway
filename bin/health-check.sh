@@ -4,4 +4,6 @@ make stop;
 git pull;
 make basic;
 sleep 10;
-curl -H "Host: whoami.local" localhost
+curl -H "Host: whoami.local" localhost;
+docker ps;
+curl "https://${SERVER_DEFAULT_HOST:-whoami.yourdomain.tld}"
