@@ -2,6 +2,6 @@
 source "$(dirname "$0")/common/bootstrap.sh"
 make stop;
 git pull;
-make alone;
+make basic;
 sleep 10;
 curl -H "Host: whoami.local" localhost

@@ -5,6 +5,11 @@ alone:
 	$(DCC) --profile frontendProfile up -d;
 	printf "${COLOR_COMMENT}Only Web server started.${COLOR_RESET}\n"
 
+basic: dotenv@start 
+basic:
+	$(DCC) --profile frontendProfile,backendProfile up -d;
+	printf "${COLOR_COMMENT}Basic Web server started.${COLOR_RESET}\n"
+
 ## Start all services
 start: dotenv@start webserver@start stages@up
 

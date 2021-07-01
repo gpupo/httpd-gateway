@@ -9,7 +9,7 @@ services:
         options:
           max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
           max-file: ${CONTAINER_DEFAULT_MAX_FILE}
-      command: --docker --docker.network=${NETWORK_GATEWAY_NAME} --docker.domain=docker.place --api=false --api.dashboard=false --docker.usebindportip=false
+      command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-frontendNetwork} --docker.domain=docker.place --api=false --api.dashboard=false --docker.usebindportip=false
       env_file:
         - .env
       environment:
