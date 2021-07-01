@@ -27,16 +27,16 @@ services:
       - $PWD/nginx/html:/usr/share/nginx/html
       - /etc/localtime:/etc/localtime
   whoami-public:
-    image: jwilder/whoami
+    whoami-backend:
+      extends:
+        file: service-whoami.yml
+        service: serviceWhoami
     profiles:
       - "frontendProfile"
     container_name: whoami-public
-    expose:
-      - "8000"
     environment:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
-      - VIRTUAL_PORT=8000
   nginx-proxy-letsencrypt:
     container_name: nginx-proxy-letsencrypt
     image: nginxproxy/acme-companion:2.1.0
@@ -62,16 +62,12 @@ services:
     profiles:
       - "proxyProfile"
   whoami-backend:
-    image: jwilder/whoami
+    extends:
+      file: service-whoami.yml
+      service: serviceWhoami
     container_name: whoami-backend
     profiles:
       - "proxyProfile"
-    expose:
-      - "8000"
-    environment:
-      - VIRTUAL_HOST=
-      - LETSENCRYPT_HOST=
-      - VIRTUAL_PORT=
     labels:
       - "traefik.web.port=8000"
       - "traefik.web.frontend.rule=Host:whoami.docker.place"
