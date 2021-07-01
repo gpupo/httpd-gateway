@@ -13,7 +13,7 @@ done < $envFile
 
 printf "##### COMPILED ENV #####\n" > $envTarget;
 for K in "${!collection[@]}"; do 
-    grep $K $envFile | grep -v "^#" | tail -n 1 >> $envTarget;
+    grep "$K=" $envFile | grep -v "^#" | tail -n 1 >> $envTarget;
 done
 
 # Ordena alfabeticamente as variaveis e elimina variaveis vazias
