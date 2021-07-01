@@ -23,5 +23,5 @@ services:
       - certs:/etc/nginx/certs:rw
       - vhost:/etc/nginx/vhost.d
       - dhparam:/etc/nginx/dhparam
-      - $PWD/nginx/html:/usr/share/nginx/html
+      # - $PWD/nginx/html:/usr/share/nginx/html
       - /etc/localtime:/etc/localtime

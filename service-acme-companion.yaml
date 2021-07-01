@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   serviceAcmeCompanion:
-    image: nginxproxy/acme-companion:2.1.0
+    image: nginxproxy/acme-companion
     profiles:
       - "backendProfile"
     volumes:
