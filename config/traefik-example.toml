@@ -3,8 +3,9 @@
 # Password: https://hostingcanada.org/htpasswd-generator/
 ################################################################
 [entryPoints]
-  [entryPoints.http]
-    [entryPoints.http.auth.basic]
+  [entryPoints.frontend]
+  address = ":80"
+    [entryPoints.frontend.auth.basic]
     users = [
       "foo:$apr1$nfjbms6p$jsTeH8Zqkq763nm9SdDf/.", #user foo, pass bar !change!
     ]
