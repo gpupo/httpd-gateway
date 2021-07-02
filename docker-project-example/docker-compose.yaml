@@ -8,9 +8,9 @@ services:
             - "traefik.docker.network=backend"
             - "traefik.enable=true"
             - "traefik.tags=test,whoami"
-    networks:
-        default:
-            external:
-                name: ${NETWORK_BACKEND_NAME:-backendNetwork}
+networks:
+    default:
+        external:
+            name: ${NETWORK_BACKEND_NAME:-backendNetwork}
 
             
