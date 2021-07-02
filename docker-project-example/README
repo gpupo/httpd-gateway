@@ -1,1 +1,7 @@
 Project to join Proxy
+
+# Test
+
+    curl  localhost \
+    --header 'Host: example-container-backend.place' \
+    --header "Authorization: Basic ${PROXY_HEALTH_CHECK_AUTH_TOKEN:-Zm9vOmJhcg==}";
