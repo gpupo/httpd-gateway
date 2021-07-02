@@ -9,12 +9,6 @@
 
     make setup;
 
-### Setup
-
-Setup logstash server value in ``.env.prod`` file:
-
-    LOGSTASH_SERVER="foo.bar:5400"
-
 ## Usage
 
 Start server

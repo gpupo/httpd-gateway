@@ -2,8 +2,6 @@
 # @see https://github.com/traefik/traefik/blob/v1.7/traefik.sample.toml
 # Password: https://hostingcanada.org/htpasswd-generator/
 ################################################################
-debug = false
-logLevel = "INFO"
 [entryPoints]
   [entryPoints.http]
   address = ":80"
@@ -11,10 +9,3 @@ logLevel = "INFO"
     users = [
       "foo:$apr1$nfjbms6p$jsTeH8Zqkq763nm9SdDf/.", #user foo, pass bar !change!
     ]
-
-[docker]
-endpoint = "unix:///var/run/docker.sock"
-watch = true
-exposedByDefault = false
-usebindportip = true
-swarmMode = false
