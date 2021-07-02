@@ -7,15 +7,11 @@ services:
         options:
           max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
           max-file: ${CONTAINER_DEFAULT_MAX_FILE}
-      command: --api --docker --logLevel="DEBUG" --docker.exposedByDefault=false --docker.network=backend
-      # command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-frontendNetwork} --docker.domain=traefik.place --docker.exposedByDefault=false --docker.usebindportip=true --api=false --api.dashboard=false
+      command: --docker --logLevel="INFO" --docker.exposedByDefault=false --docker.network=backend
       env_file:
         - .env      
       expose:
         - "80"
-        - "8080"
-      ports:
-        - '8080:8080'
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
         - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
