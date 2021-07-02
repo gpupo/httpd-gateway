@@ -2,7 +2,7 @@
 source "$(dirname "$0")/common/bootstrap.sh"
 make stop;
 git pull;
-make basic;
+make start;
 sleep 10;
 
 printf "\n> Test whoami ssl\n"
