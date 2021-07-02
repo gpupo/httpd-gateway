@@ -3,3 +3,4 @@ var/*
 /.env.local
 /.env.prod
 docker-compose.local.yaml
+config/traefik.toml
