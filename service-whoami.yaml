@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  serviceWhoami:
+    image: jwilder/whoami
+    expose:
+      - "8000"
+    environment:
+      - VIRTUAL_HOST=
+      - LETSENCRYPT_HOST=
+      - VIRTUAL_PORT=8000

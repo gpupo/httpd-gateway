@@ -19,11 +19,11 @@ Setup logstash server value in ``.env.prod`` file:
 
 Start server
 
-    make alone;
-
-Start server
-
     make start;
+
+Start server [Sem proxy server]
+
+    make boot@alone;
 
 Stop server
 
@@ -59,7 +59,7 @@ services:
 networks:
     default:
         external:
-            name: nginx-proxy
+            name: frontendNetwork
 ```
 
 Webserver with **HTTPS** on port 443
@@ -81,7 +81,7 @@ services:
 networks:
     default:
         external:
-            name: nginx-proxy
+            name: frontendNetwork
 ```
 
 

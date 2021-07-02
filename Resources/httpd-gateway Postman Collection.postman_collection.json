@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "179f70ea-eedb-40cd-83ea-e0e903d4a202",
+		"name": "httpd-gateway Postman Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "whoami local",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "whoami.local",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{SERVER_DEFAULT_HOST}}/",
+					"protocol": "http",
+					"host": [
+						"{{SERVER_DEFAULT_HOST}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "whoami",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				},
+				"followRedirects": false,
+				"disableUrlEncoding": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "whoami.local",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{SERVER_DEFAULT_HOST}}",
+					"protocol": "http",
+					"host": [
+						"{{SERVER_DEFAULT_HOST}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "whoami ssl",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true
+				},
+				"followRedirects": false,
+				"disableUrlEncoding": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "whoami.local",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://{{SERVER_DEFAULT_HOST}}",
+					"protocol": "https",
+					"host": [
+						"{{SERVER_DEFAULT_HOST}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "whoami backend AUTH",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"host": true
+				},
+				"followRedirects": false,
+				"disableUrlEncoding": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "bar",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "foo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "whoami-backend.place",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{SERVER_DEFAULT_HOST}}",
+					"protocol": "http",
+					"host": [
+						"{{SERVER_DEFAULT_HOST}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "whoami backend NO AUTH",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"host": true
+				},
+				"followRedirects": false,
+				"disableUrlEncoding": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "whoami-backend.place",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{SERVER_DEFAULT_HOST}}",
+					"protocol": "http",
+					"host": [
+						"{{SERVER_DEFAULT_HOST}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{PROXY_AUTH_USERNAME}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_DEFAULT_HOST",
+			"value": "whoami.yourdomain.tld"
+		},
+		{
+			"key": "PROXY_AUTH_USERNAME",
+			"value": "myuser"
+		}
+	]
+}

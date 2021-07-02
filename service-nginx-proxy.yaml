@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  serviceNginxProxy:
+    container_name: nginx-proxy
+    image: nginxproxy/nginx-proxy:${SERVICE_NGINX_PROXY_TAG}
+    profiles:
+      - "frontendProfile"
+    restart: always
+    logging:
+      options:
+        max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+        max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+    env_file:
+      - .env
+    environment:
+      - HTTPS_METHOD=noredirect
+      - DEFAULT_HOST=${SERVER_DEFAULT_HOST}
+    ports:
+      - '${HOST_PORT_HTTP:-80}:80'
+      - '${HOST_PORT_HTTPS:-443}:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
+      - dhparam:/etc/nginx/dhparam
+      - $PWD/nginx/html:/usr/share/nginx/html
+      - $PWD/nginx/conf.d/cloudflare.conf:/etc/nginx/conf.d/cloudflare.conf
+      - $PWD/nginx/conf.d/limits.conf:/etc/nginx/conf.d/limits.conf
+      - /etc/localtime:/etc/localtime

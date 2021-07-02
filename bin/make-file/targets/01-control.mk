@@ -1,26 +1,29 @@
 
 ## Start the clean webserver
-alone:
-	$(DCC) up -d;
-	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
+boot@alone: dotenv@start 
+boot@alone:
+	$(DCC) --profile frontendProfile up -d;
+	printf "${COLOR_COMMENT}Frontend Web server started.${COLOR_RESET}\n"
+
+boot@basic: boot@alone
+boot@basic:
+	$(DCC) --profile proxyProfile up -d;
+	printf "${COLOR_COMMENT}Proxy Web server started.${COLOR_RESET}\n"
+
+boot@debug: boot@basic
+boot@debug:
+	$(DCC) --profile testProfile up -d;
+	printf "${COLOR_COMMENT}Debug Web server started.${COLOR_RESET}\n"
 
 ## Start all services
-start: dotenv@start webserver@start stages@up
+start: boot@basic stages@up
 
 ## Setup Env local
 dotenv@start:
 	test -f .env.local || printf "\n#env local\n" > .env.local
 	cat ./.env.default ./.env.local > ./.env;
 	./bin/env-normalize.sh ./.env;
-	cat ./.env;
 	printf "${COLOR_COMMENT}Env Defined.${COLOR_RESET}\n"
-
-## Start the webserver
-webserver@start:
-	test -f docker-compose.local.yaml || printf "version: '3.3'\nservices:\n  nginx-proxy: ~" > docker-compose.local.yaml
-	docker network ls | grep -qi nginx-proxy || docker network create nginx-proxy;
-	$(DCC) -f docker-compose.yaml -f docker-compose.local.yaml up -d;
-	printf "${COLOR_COMMENT}Web server started.${COLOR_RESET}\n"
 
 stages@up:
 	bin/up-stages.sh
@@ -41,27 +44,3 @@ down:
 	$(DCC) down;
 	bin/down-stages.sh
 	printf "${COLOR_COMMENT}Web server and stages DOWN.${COLOR_RESET}\n"
-
-## Start the cadvisor and node-exporter
-monitor-start:
-	$(DCMONITOR) up -d;
-	printf "${COLOR_COMMENT}Cadivisor and node-exporter started.${COLOR_RESET}\n"
-
-## Stop the cadvisor and node-exporter
-monitor-stop:
-	$(DCMONITOR) down;
-	printf "${COLOR_COMMENT}Cadivisor and node-exporter stoped.${COLOR_RESET}\n"
-
-## Test the webserver
-test:
-	$(DCC) ps;
-	printf "\t\t ${COLOR_INFO}$(NGINX_RESPONSE)${COLOR_RESET} Running \n";
-
-## Cleanup logs and temporary files
-cleanup:
-	sudo bin/log-cleanup.sh
-	printf "${COLOR_COMMENT}Done.${COLOR_RESET}\n"
-
-## WARNING: Reset Certs and Vhosts
-reset:
-	sudo rm -rf nginx/certs/* nginx/vhost.d/*

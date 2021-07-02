@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  serviceTraefik:
+      image: traefik:${SERVICE_TRAEFIK_TAG}
+      container_name: traefik      
+      logging:
+        options:
+          max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+          max-file: ${CONTAINER_DEFAULT_MAX_FILE}
+      command: --api --docker --logLevel="DEBUG" --docker.exposedByDefault=false --docker.network=backend
+      # command: --docker --docker.network=${NETWORK_GATEWAY_NAME:-frontendNetwork} --docker.domain=traefik.place --docker.exposedByDefault=false --docker.usebindportip=true --api=false --api.dashboard=false
+      env_file:
+        - .env      
+      expose:
+        - "80"
+        - "8080"
+      ports:
+        - '8080:8080'
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ${PWD}/config/traefik.toml:/etc/traefik/traefik.toml
+        - /etc/localtime:/etc/localtime

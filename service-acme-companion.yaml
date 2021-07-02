@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  serviceAcmeCompanion:
+    image: nginxproxy/acme-companion:${SERVICE_ACME_COMPANION_TAG}
+    container_name: acme-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
+      - $PWD/nginx/html:/usr/share/nginx/html
+      - /etc/localtime:/etc/localtime
+    env_file:
+      - .env
+    environment:
+      - NGINX_PROXY_CONTAINER=${NGINX_PROXY_CONTAINER:-nginx-proxy}
+    logging:
+      options:
+        max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
+        max-file: ${CONTAINER_DEFAULT_MAX_FILE}
