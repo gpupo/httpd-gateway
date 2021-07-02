@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 source "$(dirname "$0")/common/bootstrap.sh"
-make stop;
-git pull;
-make start;
-sleep 10;
 
 printf "\n> Test whoami ssl\n"
 curl "https://${SERVER_DEFAULT_HOST}"
