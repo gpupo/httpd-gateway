@@ -1,0 +1,20 @@
+graph TD
+    HTTPS_REQUEST[Request HTTPS] --> N
+    HTTP_REQUEST[Request HTTP] --> N
+    N[nginx-proxy] --> |http protocol| HostDecision{Decision}
+    HostDecision -->|Host Public Cname| PublicRoute{Router}
+
+    subgraph frontendNetwork[Front]
+    PublicRoute -->|www.mydomain.tld| D[instance #1]
+    PublicRoute -->|otherapp.mydomain.tld| E[instance #2]
+    PublicRoute -->|another.mydomain.tld| F[instance #3]
+    end
+    HostDecision -->|Host Internal Cname| Traefik{Traefik}
+    Traefik --> |Basic Auth| PrivateRouter{Router}
+    subgraph backendNetwork[Back]
+    PrivateRouter -->|www.internal.place| D2[instance #4]
+    PrivateRouter -->|otherapp.internal.place| E2[instance #5]
+    PrivateRouter -->|another.internal.place| F2[instance #6]
+    end
+    N -->|let's encrypt ssl| acme-companion[nginxproxy/acme-companion]
+    N --> |Allow/Deny Rules| requestDenied[Denied]
