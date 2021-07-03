@@ -12,5 +12,4 @@ networks:
     default:
         external:
             name: ${NETWORK_BACKEND_NAME:-backendNetwork}
-
             
