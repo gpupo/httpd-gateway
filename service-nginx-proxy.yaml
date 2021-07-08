@@ -26,5 +26,5 @@ services:
       - $PWD/nginx/html:/usr/share/nginx/html
       - $PWD/nginx/conf.d/cloudflare.conf:/etc/nginx/conf.d/cloudflare.conf
       - $PWD/nginx/conf.d/limits.conf:/etc/nginx/conf.d/limits.conf
-      - $PWD/nginx/conf.d/limits.conf:/etc/nginx/conf.d/tokens.conf
+      - $PWD/nginx/conf.d/tokens.conf:/etc/nginx/conf.d/tokens.conf
       - /etc/localtime:/etc/localtime
