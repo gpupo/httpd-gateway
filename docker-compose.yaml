@@ -57,7 +57,6 @@ services:
       - "proxyProfile"
     labels: #See https://doc.traefik.io/traefik/v1.7/configuration/backends/docker/
       - "traefik.frontend.rule=Host:whoami-backend.place"
-      - "traefik.docker.network=backend"
       - "traefik.enable=true"
       - "traefik.tags=test,whoami"
     networks:  
