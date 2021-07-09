@@ -8,3 +8,4 @@ services:
       - VIRTUAL_HOST=
       - LETSENCRYPT_HOST=
       - VIRTUAL_PORT=8000
+      - DEBUG=false
