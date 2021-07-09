@@ -12,6 +12,7 @@ services:
       service: serviceWhoami
     profiles:
       - "testProfile"
+      - "clientProfile"
     container_name: whoami-public      
     networks:
       - default  
@@ -23,6 +24,7 @@ services:
       service: serviceWhoami
     profiles:
       - "frontendProfile"
+      - "clientProfile"
     container_name: whoami-ssl-public      
     networks:
       - default  
@@ -37,6 +39,7 @@ services:
       - default
     profiles:  
       - "frontendProfile"
+      - "mainProfile"
   traefik:
     extends:
       file: service-traefik.yaml
@@ -44,6 +47,7 @@ services:
     container_name: traefik
     profiles:
       - "proxyProfile"
+      - "mainProfile"
     environment:
       - VIRTUAL_PORT=80
       - VIRTUAL_HOST=*.place
@@ -55,6 +59,7 @@ services:
     container_name: whoami-backend
     profiles:
       - "proxyProfile"
+      - "clientProfile"
     labels: #See https://doc.traefik.io/traefik/v1.7/configuration/backends/docker/
       - "traefik.frontend.rule=Host:whoami-backend.place"
       - "traefik.enable=true"
