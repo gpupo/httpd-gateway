@@ -5,10 +5,12 @@ boot@alone:
 	$(DCC) --profile frontendProfile up -d;
 	printf "${COLOR_COMMENT}Frontend Web server started.${COLOR_RESET}\n"
 
-boot@basic: boot@alone
-boot@basic:
+boot@proxy:
 	$(DCC) --profile proxyProfile up -d;
 	printf "${COLOR_COMMENT}Proxy Web server started.${COLOR_RESET}\n"
+
+## Start Proxy
+boot@basic: boot@alone boot@proxy
 
 boot@debug: boot@basic
 boot@debug:
@@ -34,10 +36,21 @@ restart:
 	$(MAKE) down;
 	$(MAKE) start;
 
+## Restart proxy server
+restart@proxy: stop@proxy boot@proxy
+
 ## Stop the webserver
-stop:
-	$(DCC) down;
+stop@frontend:
+	$(DCC) --profile frontendProfile down;
 	printf "${COLOR_COMMENT}Web server stoped.${COLOR_RESET}\n"
+
+## Stop the proxy
+stop@proxy:
+	$(DCC) --profile proxyProfile down;
+	printf "${COLOR_COMMENT}Proxy stoped.${COLOR_RESET}\n"
+
+## Stop the webserver
+stop: stop@proxy stop@frontend
 
 ## Down all stages
 down:
