@@ -15,17 +15,13 @@ function inspect_docker_containers_network() {
         printf "%-13s %-40s %-20s %-80s\n" "$container_id" "$container_name" "$container_ip" "${container_ports[*]}"
     }
 
+
+    printf "%-13s %-40s %-20s %-80s\n" 'Container Id' 'Container Name' 'Container IP'
     local container_id
-    container_id="$1"
-    printf "%-13s %-40s %-20s %-80s\n" 'Container Id' 'Container Name' 'Container IP' 'Container Ports'
-    if [ -z "$container_id" ]; then
-        local container_id
-        docker ps -a --format "{{.ID}}" | while read -r container_id ; do
-            _print_container_network_info  "$container_id"
-        done
-    else
+    docker ps -a --format "{{.ID}}" | while read -r container_id ; do
         _print_container_network_info  "$container_id"
-    fi
+    done
+
 }
 
 inspect_docker_containers_network;
