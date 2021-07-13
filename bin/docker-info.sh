@@ -15,13 +15,12 @@ function inspect_docker_containers_network() {
         container_backend_ip="$(docker inspect --format "{{ .NetworkSettings.Networks.backendNetwork.IPAddress }}" "$container_id")"
         printf "%-40s %-13s %-20s %-20s\n" "$container_name" "$container_id" "$container_frontend_ip" "$container_backend_ip"
     }
-
-
-    printf "%-40s %-13s %-20s %-20s\n" 'Container Name' 'Container Id' 'Frontend IP' 'Backend IP'
+    
     local container_id
     docker ps -a --format "{{.ID}}" | while read -r container_id ; do
         _print_container_network_info  "$container_id"
     done
 }
 
-inspect_docker_containers_network;
+printf "%-40s %-13s %-20s %-20s\n" 'Container Name' 'Container Id' 'Frontend IP' 'Backend IP'
+inspect_docker_containers_network | sort;
