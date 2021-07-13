@@ -5,7 +5,7 @@ services:
       file: service-nginx-proxy.yaml
       service: serviceNginxProxy
     networks:
-      - default
+      - frontendNetwork
   whoami-public:
     extends:
       file: service-whoami.yaml
@@ -15,7 +15,7 @@ services:
       - "clientProfile"
     container_name: whoami-public
     networks:
-      - default  
+      - frontendNetwork  
     environment:
       - VIRTUAL_HOST=whoami.local
   whoami-ssl-public:
@@ -27,7 +27,7 @@ services:
       - "clientProfile"
     container_name: whoami-ssl-public      
     networks:
-      - default  
+      - frontendNetwork  
     environment:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
@@ -37,7 +37,7 @@ services:
       file: service-acme-companion.yaml
       service: serviceAcmeCompanion
     networks:
-      - default
+      - frontendNetwork
     profiles:  
       - "frontendProfile"
       - "mainProfile"
@@ -53,8 +53,8 @@ services:
       - VIRTUAL_PORT=80
       - VIRTUAL_HOST=*.place
     networks:
-      - default
-      - backend
+      - frontendNetwork
+      - backendNetwork
   whoami-backend:
     image: traefik/whoami
     container_name: whoami-backend
@@ -66,7 +66,7 @@ services:
       - "traefik.enable=true"
       - "traefik.tags=test,whoami"
     networks:  
-      - backend
+      - backendNetwork
 volumes:
   conf:
   vhost:
@@ -75,9 +75,9 @@ volumes:
   certs:
   acme:
 networks:
-  default:
+  frontendNetwork:
     external:
       name: ${NETWORK_GATEWAY_NAME:-frontendNetwork}
-  backend:
+  backendNetwork:
     external:
       name: ${NETWORK_BACKEND_NAME:-backendNetwork}

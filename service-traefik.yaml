@@ -7,7 +7,7 @@ services:
         options:
           max-size: ${CONTAINER_DEFAULT_MAX_SIZE}
           max-file: ${CONTAINER_DEFAULT_MAX_FILE}
-      command: --docker --logLevel="INFO" --docker.exposedByDefault=false --docker.network=backend
+      command: --docker --logLevel="INFO" --docker.exposedByDefault=false --docker.network=backendNetwork
       env_file:
         - .env      
       expose:
