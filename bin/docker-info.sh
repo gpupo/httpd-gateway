@@ -11,8 +11,8 @@ function inspect_docker_containers_network() {
     
         container_ports=( $(docker port "$container_id" | grep -o "0.0.0.0:.*" | cut -f2 -d:) )
         container_name="$(docker inspect --format "{{ .Name }}" "$container_id" | sed 's/\///')"
-        container_frontend_ip="$(docker inspect --format "{{ .NetworkSettings.Networks.frontendNetwork.IPAddress }}" "$container_id")"
-        container_backend_ip="$(docker inspect --format "{{ .NetworkSettings.Networks.backendNetwork.IPAddress }}" "$container_id")"
+        container_frontend_ip="$(docker inspect --format "{{ .NetworkSettings.Networks.frontendNetwork.IPAddress }}" "$container_id" | grep -v value)"
+        container_backend_ip="$(docker inspect --format "{{ .NetworkSettings.Networks.backendNetwork.IPAddress }}" "$container_id" | grep -v value)"
         printf "%-40s %-13s %-20s %-20s\n" "$container_name" "$container_id" "$container_frontend_ip" "$container_backend_ip"
     }
     
