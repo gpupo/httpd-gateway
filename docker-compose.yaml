@@ -13,7 +13,7 @@ services:
     profiles:
       - "testProfile"
       - "clientProfile"
-    container_name: whoami-public      
+    container_name: whoami-public
     networks:
       - default  
     environment:
