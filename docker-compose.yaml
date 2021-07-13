@@ -18,6 +18,7 @@ services:
       - frontendNetwork  
     environment:
       - VIRTUAL_HOST=whoami.local
+      - HTTPS_METHOD=nohttps
   whoami-ssl-public:
     extends:
       file: service-whoami.yaml
@@ -31,6 +32,7 @@ services:
     environment:
       - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - HTTPS_METHOD=nohttp
       # - DEBUG=true
   acme-companion:
     extends:
@@ -52,6 +54,7 @@ services:
     environment:
       - VIRTUAL_PORT=80
       - VIRTUAL_HOST=*.place
+      - HTTPS_METHOD=nohttps
     networks:
       - frontendNetwork
       - backendNetwork
