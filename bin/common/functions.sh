@@ -28,8 +28,15 @@ function_load_custom_env_file() {
 }
 
 up_stage() {
-    STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/$1"
-    printf "Stage:%s\n Path:%s\n" "$1" "${STAGE_TARGET_DIRECTORY}";
+    local stage_name=$1;
+    local wait_time=${:-1};
+    printf "\nStarting [%s]\n" "${stage_name}" "${wait_time}";
+    STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/${stage_name}"
+    printf "Stage:%s\n Path:%s\n" "${stage_name}" "${STAGE_TARGET_DIRECTORY}";
     test -d $STAGE_TARGET_DIRECTORY/logs || mkdir -pv $STAGE_TARGET_DIRECTORY/logs;
     ls $STAGE_TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && pushd $STAGE_TARGET_DIRECTORY/current/ && $DOCKER_COMPOSE_BIN_PATH/docker-compose up -d;
+
+    printf "\nWaiting [%s] seconds...\n" "${wait_time}";
+    sleep ${wait_time};
+    printf "\n[%s] DONE\n" "${stage_name}";
 }
