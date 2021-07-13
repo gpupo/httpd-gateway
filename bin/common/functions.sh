@@ -29,7 +29,7 @@ function_load_custom_env_file() {
 
 up_stage() {
     local stage_name=$1;
-    local wait_time=${:-1};
+    local wait_time=${2:-0};
     printf "\nStarting [%s]\n" "${stage_name}" "${wait_time}";
     STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/${stage_name}"
     printf "Stage:%s\n Path:%s\n" "${stage_name}" "${STAGE_TARGET_DIRECTORY}";
