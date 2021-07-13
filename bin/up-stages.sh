@@ -9,8 +9,8 @@ if [ -z "$CURRENT_STAGE_NAME" ]
 then
   eval $(grep_builder_line $SERVER_STAGE_CONFIG_DIR_PATH) | while read CURRENT_STAGE_NAME
   do
-    up_stage "${CURRENT_STAGE_NAME}" 60;    
+    up_stage "${CURRENT_STAGE_NAME}" 10;    
   done
 else
-    up_stage "${CURRENT_STAGE_NAME}" 30;
+    up_stage "${CURRENT_STAGE_NAME}" 5;
 fi;
