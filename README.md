@@ -5,6 +5,8 @@
 Components 
 
 * https://github.com/nginx-proxy/nginx-proxy/
+* https://github.com/nginx-proxy/acme-companion
+
 
 ## Install
 
