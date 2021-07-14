@@ -10,6 +10,5 @@ docker run \
     -e LETSENCRYPT_HOST=${WARMUP_DOMAIN} \
     -e VIRTUAL_PORT=8000 \
     -e DEBUG=true \
-    -e HTTPS_METHOD=nohttp \
     --network="frontendNetwork" \
  jwilder/whoami
