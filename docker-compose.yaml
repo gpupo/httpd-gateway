@@ -25,8 +25,8 @@ services:
       file: service-whoami.yaml
       service: serviceWhoami
     profiles:
-      - "frontendProfile"
-      - "clientProfile"
+      # - "frontendProfile"
+      - "testProfile"
     container_name: whoami-ssl-public      
     networks:
       - frontendNetwork  
@@ -55,7 +55,7 @@ services:
     environment:
       - VIRTUAL_PORT=80
       - VIRTUAL_HOST=.place
-      # - HTTPS_METHOD=nohttps
+      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST},.place
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
       - DEBUG=true
     networks:
