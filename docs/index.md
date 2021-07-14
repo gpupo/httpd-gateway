@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # httpd-gateway
 
 ![mermaid-diagram](Resources/mermaid-diagram.svg?raw=true)
