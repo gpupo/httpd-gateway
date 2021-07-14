@@ -32,7 +32,7 @@ up_stage() {
     local wait_time=${2:-0};
     printf "\nStarting [%s]\n" "${stage_name}";
     STAGE_TARGET_DIRECTORY="${SERVER_STAGE_DIRECTORY}/${stage_name}"
-    printf "Stage:%s\n Path:%s\n" "${stage_name}" "${STAGE_TARGET_DIRECTORY}";
+    # printf "Stage:%s\n Path:%s\n" "${stage_name}" "${STAGE_TARGET_DIRECTORY}";
     test -d $STAGE_TARGET_DIRECTORY/logs || mkdir -pv $STAGE_TARGET_DIRECTORY/logs;
     ls $STAGE_TARGET_DIRECTORY/current/docker-compose.y*l 1>/dev/null 2>&1 && cd $STAGE_TARGET_DIRECTORY/current/ && $DOCKER_COMPOSE_BIN_PATH/docker-compose up -d;
 
