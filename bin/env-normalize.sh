@@ -70,7 +70,7 @@ while IFS='=' read -r key temp || [ -n "$key" ]; do
 done < $envOrdenedFile
 
 
-echo "TRAEFIK_VIRTUAL_HOST_REGEX=~(${SERVER_DEFAULT_HOST//\./\\\.}|[a-zA-Z\-]{2,20}\.[a-zA-Z]{2,20}\.place)$~gm" >> $envFile;
+echo "TRAEFIK_VIRTUAL_HOST_REGEX=~(${SERVER_DEFAULT_HOST//\./\\\.}|[a-zA-Z\-]+\.[a-zA-Z]+\.place)$" >> $envFile;
 
 
 printf "##### < COMPILED at %s #####\n" "$(date '+%Y-%m-%d_%Hh%m')" >> $envFile;

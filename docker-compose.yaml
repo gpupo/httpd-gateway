@@ -52,7 +52,7 @@ services:
       - "mainProfile"
     environment:
       - VIRTUAL_PORT=80
-      - VIRTUAL_HOST=${TRAEFIK_VIRTUAL_HOST_REGEX}
+      - VIRTUAL_HOST=$TRAEFIK_VIRTUAL_HOST_REGEX
       - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
       - DEBUG=true
     networks:
