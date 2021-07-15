@@ -19,20 +19,20 @@ services:
   #   environment:
   #     - VIRTUAL_HOST=whoami.local
   #     - DEBUG=true
-  # whoami-ssl-public:
-  #   extends:
-  #     file: service-whoami.yaml
-  #     service: abstract-whoami
-  #   profiles:
-  #     # - "frontendProfile"
-  #     - "testProfile"
-  #   container_name: whoami-ssl-public      
-  #   networks:
-  #     - frontendNetwork  
-  #   environment:
-  #     - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
-  #     - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
-  #     - DEBUG=true
+  whoami-ssl-public:
+    extends:
+      file: service-whoami.yaml
+      service: abstract-whoami
+    profiles:
+      - "frontendProfile"
+      - "testProfile"
+    container_name: whoami-ssl-public      
+    networks:
+      - frontendNetwork  
+    environment:
+      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
+      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - DEBUG=true
   acme-companion:
     extends:
       file: service-acme-companion.yaml
@@ -52,8 +52,7 @@ services:
       - "mainProfile"
     environment:
       - VIRTUAL_PORT=80
-      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST},.place
-      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+      - VIRTUAL_HOST=.place
       - DEBUG=true
     networks:
       - frontendNetwork
