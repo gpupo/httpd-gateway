@@ -6,33 +6,33 @@ services:
       service: abstract-nginx-proxy
     networks:
       - frontendNetwork
-  whoami-public:
-    extends:
-      file: service-whoami.yaml
-      service: abstract-whoami
-    profiles:
-      - "testProfile"
-      - "clientProfile"
-    container_name: whoami-public
-    networks:
-      - frontendNetwork  
-    environment:
-      - VIRTUAL_HOST=whoami.local
-      - DEBUG=true
-  whoami-ssl-public:
-    extends:
-      file: service-whoami.yaml
-      service: abstract-whoami
-    profiles:
-      # - "frontendProfile"
-      - "testProfile"
-    container_name: whoami-ssl-public      
-    networks:
-      - frontendNetwork  
-    environment:
-      - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
-      - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
-      - DEBUG=true
+  # whoami-public:
+  #   extends:
+  #     file: service-whoami.yaml
+  #     service: abstract-whoami
+  #   profiles:
+  #     - "testProfile"
+  #     - "clientProfile"
+  #   container_name: whoami-public
+  #   networks:
+  #     - frontendNetwork  
+  #   environment:
+  #     - VIRTUAL_HOST=whoami.local
+  #     - DEBUG=true
+  # whoami-ssl-public:
+  #   extends:
+  #     file: service-whoami.yaml
+  #     service: abstract-whoami
+  #   profiles:
+  #     # - "frontendProfile"
+  #     - "testProfile"
+  #   container_name: whoami-ssl-public      
+  #   networks:
+  #     - frontendNetwork  
+  #   environment:
+  #     - VIRTUAL_HOST=${SERVER_DEFAULT_HOST}
+  #     - LETSENCRYPT_HOST=${SERVER_DEFAULT_HOST}
+  #     - DEBUG=true
   acme-companion:
     extends:
       file: service-acme-companion.yaml
