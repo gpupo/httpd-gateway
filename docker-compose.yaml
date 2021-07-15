@@ -3,13 +3,13 @@ services:
   nginx-proxy:
     extends:
       file: service-nginx-proxy.yaml
-      service: serviceNginxProxy
+      service: abstract-nginx-proxy
     networks:
       - frontendNetwork
   whoami-public:
     extends:
       file: service-whoami.yaml
-      service: serviceWhoami
+      service: abstract-whoami
     profiles:
       - "testProfile"
       - "clientProfile"
@@ -22,7 +22,7 @@ services:
   whoami-ssl-public:
     extends:
       file: service-whoami.yaml
-      service: serviceWhoami
+      service: abstract-whoami
     profiles:
       # - "frontendProfile"
       - "testProfile"
@@ -36,7 +36,7 @@ services:
   acme-companion:
     extends:
       file: service-acme-companion.yaml
-      service: serviceAcmeCompanion
+      service: abstract-acme-companion
     networks:
       - frontendNetwork
     profiles:  
@@ -45,7 +45,7 @@ services:
   traefik:
     extends:
       file: service-traefik.yaml
-      service: serviceTraefik
+      service: abstract-traefik
     container_name: traefik
     profiles:
       - "proxyProfile"

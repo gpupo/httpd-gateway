@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  serviceWhoami:
+  abstract-whoami:
     image: jwilder/whoami
     expose:
       - "8000"

@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  serviceAcmeCompanion:
+  abstract-acme-companion:
     image: nginxproxy/acme-companion:${SERVICE_ACME_COMPANION_TAG}
     container_name: acme-companion
     volumes:

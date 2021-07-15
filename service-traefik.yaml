@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  serviceTraefik:
+  abstract-traefik:
       image: traefik:${SERVICE_TRAEFIK_TAG}
       container_name: traefik      
       logging:

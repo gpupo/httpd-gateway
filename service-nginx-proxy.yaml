@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  serviceNginxProxy:
+  abstract-nginx-proxy:
     container_name: nginx-proxy
     image: nginxproxy/nginx-proxy:${SERVICE_NGINX_PROXY_TAG}
     profiles:
