@@ -1,5 +1,9 @@
 # httpd-gateway
 
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/gpupo/httpd-gateway)
+
+
+
 ![mermaid-diagram](Resources/mermaid-diagram.svg?raw=true)
 
 Components 
