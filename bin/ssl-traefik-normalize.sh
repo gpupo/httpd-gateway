@@ -7,7 +7,7 @@ symlinks_default_cert_to_dot_place() {
     local source_file=/etc/nginx/certs/${SERVER_DEFAULT_HOST}.${file_prefix};
     local target_file=/etc/nginx/certs/.place.${file_prefix};
     printf "Symlink %s => %s\n" "${source_file}" "${target_file}";
-    docker-compose exec nginx-proxy "lnf -sn ${source_file} ${target_file}";
+    docker-compose exec nginx-proxy "ln -snf ${source_file} ${target_file}";
 }
 
 symlinks_default_cert_to_dot_place "crt";
