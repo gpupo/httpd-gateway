@@ -6,6 +6,7 @@ boot@alone:
 	printf "${COLOR_COMMENT}Frontend Web server started.${COLOR_RESET}\n"
 
 boot@proxy:
+	./bin/ssl-traefik-normalize.sh;
 	$(DCC) --profile proxyProfile up -d;
 	printf "${COLOR_COMMENT}Proxy Web server started.${COLOR_RESET}\n"
 
@@ -13,7 +14,7 @@ boot@proxy:
 boot@basic: boot@alone boot@proxy
 
 boot@debug: boot@basic
-boot@debug:
+boot@debug:	
 	$(DCC) --profile testProfile up -d;
 	printf "${COLOR_COMMENT}Debug Web server started.${COLOR_RESET}\n"
 
