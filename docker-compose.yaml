@@ -39,9 +39,6 @@ services:
       service: abstract-acme-companion
     networks:
       - frontendNetwork
-    profiles:  
-      - "frontendProfile"
-      - "mainProfile"
   traefik:
     extends:
       file: service-traefik.yaml

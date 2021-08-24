@@ -3,6 +3,10 @@ services:
   abstract-acme-companion:
     image: nginxproxy/acme-companion:${SERVICE_ACME_COMPANION_TAG}
     container_name: acme-companion
+    profiles:
+      - "frontendProfile"
+      - "mainProfile"
+      - "nginxProfile"    
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - acme:/etc/acme.sh

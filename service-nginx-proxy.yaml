@@ -6,6 +6,7 @@ services:
     profiles:
       - "frontendProfile"
       - "mainProfile"
+      - "nginxProfile"
     restart: always
     logging:
       options:
