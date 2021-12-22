@@ -25,7 +25,11 @@ start: boot@basic stages@up
 dotenv@start:
 	test -f .env.local || printf "\n#env local\n" > .env.local
 	cat ./.env.default ./.env.local > ./.env;
+ifeq ($(shell uname) , Linux)
 	./bin/env-normalize.sh ./.env;
+else
+	printf "${COLOR_COMMENT}$(shell uname) OS. ${COLOR_INFO}No normalization performed!${COLOR_RESET}\n";
+endif
 	printf "${COLOR_COMMENT}Env Defined.${COLOR_RESET}\n"
 
 stages@up:
