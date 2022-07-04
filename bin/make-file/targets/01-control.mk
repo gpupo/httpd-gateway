@@ -25,7 +25,11 @@ start: boot@basic stages@up
 dotenv@start:
 	test -f .env.local || printf "\n#env local\n" > .env.local
 	cat ./.env.default ./.env.local > ./.env;
+ifneq ($(shell uname), Darwin)
 	./bin/env-normalize.sh ./.env;
+else
+	./bin/env-normalize.ksh ./.env;
+endif
 	printf "${COLOR_COMMENT}Env Defined.${COLOR_RESET}\n"
 
 stages@up:
